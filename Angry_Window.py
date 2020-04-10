@@ -10,12 +10,15 @@ topFrame.pack()
 bottomFrame = Frame(root)
 bottomFrame.pack(side=BOTTOM)
 
-eyes = Label(topFrame, text="＼(^o^)／")
-eyes.pack(side="bottom")
+welcome_text = Label(topFrame, text="Welcome")
+welcome_text.pack(side="bottom")
 
-variable=StringVar()
+contentplaceholder = Label(bottomFrame, text="Contentplaceholder")
+contentplaceholder.pack(side="bottom")
 
-random_text = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", ":')" ]
+variable = StringVar()
+
+random_text = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", ":')"]
 
 def update_label():
     i = 0
@@ -27,10 +30,12 @@ def update_label():
         i += 1
         root.update()
 
-your_label=Label(root, textvariable = variable)
-your_label.pack()
-start_button=Button(root, text = "start", command = update_label)
+
+face = Label(root, textvariable=variable)
+face.pack()
+start_button = Button(root, text="start", command=update_label)
 start_button.pack()
 
 # Keep running window
 root.mainloop()
+
