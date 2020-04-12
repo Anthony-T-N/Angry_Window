@@ -20,7 +20,7 @@ topFrame.pack()
 
 variable = StringVar()
 
-random_text = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", ":')"]
+random_text = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ"]
 
 def update_label():
     i = 0
@@ -32,14 +32,25 @@ def update_label():
         i += 1
         root.update()
 
+def update_pos():
+    index = 0
+    while True:
+        print(index)
+        index += 1
+        root.geometry("100x100" + "+" + str(index) + "+" + str(index))
+        root.update()
 
 face = Label(root, textvariable=variable)
-face.place(anchor=CENTER) 
+face.place(x=25, y=25, anchor="center") 
 face.pack()
 start_button = Button(root, text="start", command=update_label)
 start_button.pack()
 
+start_button2 = Button(root, text="Start", command=update_pos)
+start_button2.pack()
+
 # Keep running window
 root.mainloop()
+
 
 
