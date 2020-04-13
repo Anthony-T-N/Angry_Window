@@ -2,9 +2,17 @@ from tkinter import *
 import time
 # Blank window.
 root = Tk()
+root.title("Evil_Window")
 root.geometry("100x100")
 root.configure(bg="black")
-#root.overrideredirect(True)   
+#root.overrideredirect(True)
+# Cannot change dimensions of window. Disables maxmise button
+#root.resizable(width=False, height=False)
+
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+print(screen_width)
+print(screen_height)
 
 topFrame = Frame(root)
 topFrame.pack()
@@ -39,6 +47,13 @@ def update_pos():
         index += 1
         root.geometry("100x100" + "+" + str(index) + "+" + str(index))
         root.update()
+        x = (screen_width/2) - (100/2)
+        y = (screen_height/2) - (100/2)
+        print(x, y)
+        if (x == screen_width):
+            root.geometry('%dx%d+%d+%d' % (100, 100, 0, 0))
+        if (y == screen_height):
+            root.geometry('%dx%d+%d+%d' % (100, 100, 0, 0))
 
 face = Label(root, textvariable=variable)
 face.place(x=25, y=25, anchor="center") 
