@@ -17,6 +17,10 @@ print(screen_height)
 topFrame = Frame(root)
 topFrame.pack()
 
+x = (screen_width/2) - (100/2)
+y = (screen_height/2) - (100/2)
+root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
+
 #bottomFrame = Frame(root)
 #bottomFrame.pack(side=BOTTOM)
 
@@ -43,17 +47,24 @@ def update_label():
 def update_pos():
     index = 0
     while True:
+        #time.sleep(0.01)
         print(index)
         index += 1
         root.geometry("100x100" + "+" + str(index) + "+" + str(index))
         root.update()
-        x = (screen_width/2) - (100/2)
-        y = (screen_height/2) - (100/2)
-        print(x, y)
-        if (x == screen_width):
-            root.geometry('%dx%d+%d+%d' % (100, 100, 0, 0))
-        if (y == screen_height):
-            root.geometry('%dx%d+%d+%d' % (100, 100, 0, 0))
+        current_x = root.winfo_x()
+        current_y = root.winfo_y()
+        print(current_x, current_y)
+        if (current_x >= screen_width):
+            root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
+            current_x = 100
+            index = 0
+            root.update()
+        if (current_y >= screen_height):
+            root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
+            current_y = 100
+            index = 0
+            root.update()
 
 face = Label(root, textvariable=variable)
 face.place(x=25, y=25, anchor="center") 
