@@ -1,5 +1,6 @@
 from tkinter import *
 import time
+import random
 # Blank window.
 root = Tk()
 root.title("Evil_Window")
@@ -45,35 +46,51 @@ def update_label():
         root.update()
 
 def update_pos():
+    random_number = random.randrange(10)
     index = 0
     while True:
+        if (index == 0 or index == 100):
+            random_number = random.randrange(1000)
+        random_switch = random.randrange(1)
+        random_number += 1
         #time.sleep(0.01)
         print(index)
         index += 1
-        root.geometry("100x100" + "+" + str(index) + "+" + str(index))
-        root.update()
+        root.geometry("100x100" + "+" + str(-random_number) + "+" + str(-random_number))
+        """
+        if (random_switch == 0):
+            root.geometry("100x100" + "+" + str(random_number) + "+" + str(random_number))
+        if (random_switch == 1):
+            root.geometry("100x100" + "+" + str(-random_number) + "+" + str(-random_number))
+        """
         current_x = root.winfo_x()
         current_y = root.winfo_y()
         print(current_x, current_y)
         if (current_x >= screen_width):
-            root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
-            current_x = 100
-            index = 0
-            root.update()
+            random_number = random.randrange(1000)
         if (current_y >= screen_height):
-            root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
-            current_y = 100
-            index = 0
-            root.update()
+            random_number = random.randrange(1000)
+        root.update()
 
 face = Label(root, textvariable=variable)
-face.place(x=25, y=25, anchor="center") 
+face.place(x=25, y=25, anchor="center")
 face.pack()
 start_button = Button(root, text="start", command=update_label)
 start_button.pack()
 
-start_button2 = Button(root, text="Start", command=update_pos)
-start_button2.pack()
+current_x = root.winfo_x()
+current_y = root.winfo_y()
+while True:
+    if (current_x != root.winfo_x() or current_y != root.winfo_y):
+        current_x = root.winfo_x()
+        current_y = root.winfo_y()
+        print("Current_Cord")
+        print(current_x)
+        print(current_y)
+    else:
+        pass
+#start_button2 = Button(root, text="Start", command=update_pos)
+#start_button2.pack()
 
 # Keep running window
 root.mainloop()
