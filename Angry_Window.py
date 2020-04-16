@@ -57,12 +57,10 @@ def update_pos():
         print(index)
         index += 1
         root.geometry("100x100" + "+" + str(-random_number) + "+" + str(-random_number))
-        """
         if (random_switch == 0):
             root.geometry("100x100" + "+" + str(random_number) + "+" + str(random_number))
         if (random_switch == 1):
             root.geometry("100x100" + "+" + str(-random_number) + "+" + str(-random_number))
-        """
         current_x = root.winfo_x()
         current_y = root.winfo_y()
         print(current_x, current_y)
@@ -78,22 +76,26 @@ face.pack()
 start_button = Button(root, text="start", command=update_label)
 start_button.pack()
 
-current_x = root.winfo_x()
-current_y = root.winfo_y()
-while True:
-    if (current_x != root.winfo_x() or current_y != root.winfo_y):
-        current_x = root.winfo_x()
-        current_y = root.winfo_y()
+def current_pos():
+    current_x1 = root.winfo_x()
+    current_y2 = root.winfo_y()
+    if (current_x1 != root.winfo_x() or current_y2 != root.winfo_y):
         print("Current_Cord")
         print(current_x)
         print(current_y)
     else:
         pass
-#start_button2 = Button(root, text="Start", command=update_pos)
-#start_button2.pack()
+    current_x = root.winfo_x()
+    current_y = root.winfo_y()
 
+start_button2 = Button(root, text="Start", command=update_pos)
+start_button2.pack()
+
+current_cord_button = Button(root, text="Current_Cord", command=current_pos)
+current_cord_button.pack()
+
+current_pos()
 # Keep running window
 root.mainloop()
-
 
 
