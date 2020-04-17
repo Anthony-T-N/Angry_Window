@@ -37,38 +37,36 @@ random_text = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)",
 
 def update_label():
     i = 0
-    while 1:
-        #time.sleep(1)
-        if (i >= 4):
-            i = 0
-        variable.set(str(random_text[i]))
-        i += 1
-        root.update()
+    #time.sleep(1)
+    if (i >= 4):
+        i = 0
+    variable.set(str(random_text[i]))
+    i += 1
+    root.update()
 
 def update_pos():
     random_number = random.randrange(10)
     index = 0
-    while True:
-        if (index == 0 or index == 100):
-            random_number = random.randrange(1000)
-        random_switch = random.randrange(1)
-        random_number += 1
-        #time.sleep(0.01)
-        print(index)
-        index += 1
+    if (index == 0 or index == 100):
+        random_number = random.randrange(1000)
+    random_switch = random.randrange(1)
+    random_number += 1
+    #time.sleep(0.01)
+    print(index)
+    index += 1
+    root.geometry("100x100" + "+" + str(-random_number) + "+" + str(-random_number))
+    if (random_switch == 0):
+        root.geometry("100x100" + "+" + str(random_number) + "+" + str(random_number))
+    if (random_switch == 1):
         root.geometry("100x100" + "+" + str(-random_number) + "+" + str(-random_number))
-        if (random_switch == 0):
-            root.geometry("100x100" + "+" + str(random_number) + "+" + str(random_number))
-        if (random_switch == 1):
-            root.geometry("100x100" + "+" + str(-random_number) + "+" + str(-random_number))
-        current_x = root.winfo_x()
-        current_y = root.winfo_y()
-        print(current_x, current_y)
-        if (current_x >= screen_width):
-            random_number = random.randrange(1000)
-        if (current_y >= screen_height):
-            random_number = random.randrange(1000)
-        root.update()
+    current_x = root.winfo_x()
+    current_y = root.winfo_y()
+    print(current_x, current_y)
+    if (current_x >= screen_width):
+        random_number = random.randrange(1000)
+    if (current_y >= screen_height):
+        random_number = random.randrange(1000)
+    root.update()
 
 face = Label(root, textvariable=variable)
 face.place(x=25, y=25, anchor="center")
@@ -81,12 +79,10 @@ def current_pos():
     current_y2 = root.winfo_y()
     if (current_x1 != root.winfo_x() or current_y2 != root.winfo_y):
         print("Current_Cord")
-        print(current_x)
-        print(current_y)
+        print(current_x1)
+        print(current_y2)
     else:
         pass
-    current_x = root.winfo_x()
-    current_y = root.winfo_y()
 
 start_button2 = Button(root, text="Start", command=update_pos)
 start_button2.pack()
@@ -94,8 +90,24 @@ start_button2.pack()
 current_cord_button = Button(root, text="Current_Cord", command=current_pos)
 current_cord_button.pack()
 
-current_pos()
+current_x1 = root.winfo_x()
+current_y2 = root.winfo_y
+
+if (current_x1 != root.winfo_x() or current_y2 != root.winfo_y):
+    current_pos()
+
+print("TEST")
+while True:
+    internal_option = random.randrange(2)
+    print("Internal_Option:", internal_option)
+    if (internal_option == 0):
+        for i in range(10):
+            time.sleep(0.1)
+            update_pos()
+    if (internal_option == 1):
+        for i in range(10):
+            time.sleep(0.1)
+            update_label()
 # Keep running window
 root.mainloop()
-
 
