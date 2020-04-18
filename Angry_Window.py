@@ -45,27 +45,20 @@ def update_label():
     root.update()
 
 def update_pos():
-    random_number = random.randrange(10)
-    index = 0
-    if (index == 0 or index == 100):
-        random_number = random.randrange(1000)
-    random_switch = random.randrange(1)
-    random_number += 1
-    #time.sleep(0.01)
-    print(index)
-    index += 1
-    root.geometry("100x100" + "+" + str(-random_number) + "+" + str(-random_number))
-    if (random_switch == 0):
-        root.geometry("100x100" + "+" + str(random_number) + "+" + str(random_number))
-    if (random_switch == 1):
-        root.geometry("100x100" + "+" + str(-random_number) + "+" + str(-random_number))
-    current_x = root.winfo_x()
-    current_y = root.winfo_y()
+    current_x = root.winfo_x() + 1
+    current_y = root.winfo_y() + 1
     print(current_x, current_y)
+    root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
     if (current_x >= screen_width):
-        random_number = random.randrange(1000)
+        root.geometry("100x100" + "+" + str("0") + "+" + str("0"))
     if (current_y >= screen_height):
-        random_number = random.randrange(1000)
+        root.geometry("100x100" + "+" + str("0") + "+" + str("0"))
+    root.update()
+
+def update_rand_pos():
+    random_x_cord = random.randrange(1920)
+    random_y_cord = random.randrange(1080)
+    root.geometry("100x100" + "+" + str(random_x_cord) + "+" + str(random_y_cord))
     root.update()
 
 face = Label(root, textvariable=variable)
@@ -79,8 +72,8 @@ def current_pos():
     current_y2 = root.winfo_y()
     if (current_x1 != root.winfo_x() or current_y2 != root.winfo_y):
         print("Current_Cord")
-        print(current_x1)
-        print(current_y2)
+        print("x", current_x1)
+        print("y", current_y2)
     else:
         pass
 
@@ -93,21 +86,18 @@ current_cord_button.pack()
 current_x1 = root.winfo_x()
 current_y2 = root.winfo_y
 
-if (current_x1 != root.winfo_x() or current_y2 != root.winfo_y):
-    current_pos()
-
 print("TEST")
 while True:
     internal_option = random.randrange(2)
     print("Internal_Option:", internal_option)
     if (internal_option == 0):
         for i in range(10):
-            time.sleep(0.1)
+        #    time.sleep(0.1)
             update_pos()
     if (internal_option == 1):
-        for i in range(10):
-            time.sleep(0.1)
-            update_label()
+        time.sleep(0.1)
+        update_label()
+
 # Keep running window
 root.mainloop()
 
