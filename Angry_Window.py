@@ -45,14 +45,28 @@ def update_label():
     root.update()
 
 def update_pos():
-    current_x = root.winfo_x() + 1
-    current_y = root.winfo_y() + 1
+    random_option = random.randrange(4)
+    current_x = root.winfo_x()
+    current_y = root.winfo_y()
+    print("Update_Pos", random_option)
+    if (random_option == 0):
+        current_x += 5
+        current_y += 5
+    if (random_option == 1):
+        current_x -= 5
+        current_y -= 5
+    if (random_option == 2):
+        current_x += 5
+        current_y -= 5
+    if (random_option == 3):
+        current_x -= 5
+        current_y += 5
     print(current_x, current_y)
     root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
     if (current_x >= screen_width):
-        root.geometry("100x100" + "+" + str("0") + "+" + str("0"))
-    if (current_y >= screen_height):
-        root.geometry("100x100" + "+" + str("0") + "+" + str("0"))
+        root.geometry("100x100" + "+" + str(-root.winfo_x()) + "+" + str(-root.winfo_x()))
+    if (current_y >= screen_height or current_y <= 0):
+        root.geometry("100x100" + "+" + str(-root.winfo_x()) + "+" + str(-root.winfo_x()))
     root.update()
 
 def update_rand_pos():
@@ -86,12 +100,11 @@ current_cord_button.pack()
 current_x1 = root.winfo_x()
 current_y2 = root.winfo_y
 
-print("TEST")
 while True:
     internal_option = random.randrange(2)
     print("Internal_Option:", internal_option)
     if (internal_option == 0):
-        for i in range(10):
+        for i in range(20):
         #    time.sleep(0.1)
             update_pos()
     if (internal_option == 1):
