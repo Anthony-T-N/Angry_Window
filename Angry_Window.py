@@ -1,14 +1,20 @@
 from tkinter import *
 import time
 import random
+import sys
+
 # Blank window.
 root = Tk()
 root.title("Evil_Window")
 root.geometry("100x100")
 root.configure(bg="black")
-#root.overrideredirect(True)
+root.overrideredirect(True)
 # Cannot change dimensions of window. Disables maxmise button
-#root.resizable(width=False, height=False)
+root.resizable(width=False, height=False)
+
+def close(event):
+    root.destroy()
+root.bind('<Escape>', close)
 
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
