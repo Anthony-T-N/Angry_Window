@@ -7,9 +7,10 @@ import sys
 root = Tk()
 root.title("Evil_Window")
 root.geometry("100x100")
-root.configure(bg="black")
+root.configure(bg="grey")
+root.config(highlightbackground="white", highlightcolor="white", highlightthickness=3)
 root.overrideredirect(True)
-# Cannot change dimensions of window. Disables maxmise button
+# Fixed window dimensions. Disables maximise button.
 root.resizable(width=False, height=False)
 
 def close(event):
