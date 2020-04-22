@@ -7,7 +7,7 @@ import sys
 root = Tk()
 root.title("Evil_Window")
 root.geometry("100x100")
-root.configure(bg="grey")
+root.configure(bg="#0e4f73")
 root.config(highlightbackground="white", highlightcolor="white", highlightthickness=3)
 root.overrideredirect(True)
 # Fixed window dimensions. Disables maximise button.
@@ -19,8 +19,6 @@ root.bind('<Escape>', close)
 
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
-print(screen_width)
-print(screen_height)
 
 topFrame = Frame(root)
 topFrame.pack()
@@ -28,15 +26,6 @@ topFrame.pack()
 x = (screen_width/2) - (100/2)
 y = (screen_height/2) - (100/2)
 root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
-
-#bottomFrame = Frame(root)
-#bottomFrame.pack(side=BOTTOM)
-
-#welcome_text = Label(topFrame, text="Welcome")
-#welcome_text.pack(side="bottom")
-
-#contentplaceholder = Label(bottomFrame, text="Contentplaceholder")
-#contentplaceholder.pack(side="bottom")
 
 variable = StringVar()
 
@@ -76,17 +65,12 @@ def update_pos():
         root.geometry("100x100" + "+" + str(-root.winfo_x()) + "+" + str(-root.winfo_x()))
     root.update()
 
-def update_rand_pos():
-    random_x_cord = random.randrange(1920)
-    random_y_cord = random.randrange(1080)
-    root.geometry("100x100" + "+" + str(random_x_cord) + "+" + str(random_y_cord))
-    root.update()
-
 face = Label(root, textvariable=variable)
-face.place(x=25, y=25, anchor="center")
-face.pack()
+face.place(relx=.5, rely=.5, anchor="center")
+"""
 start_button = Button(root, text="start", command=update_label)
 start_button.pack()
+"""
 
 def current_pos():
     current_x1 = root.winfo_x()
@@ -98,12 +82,13 @@ def current_pos():
     else:
         pass
 
+"""
 start_button2 = Button(root, text="Start", command=update_pos)
 start_button2.pack()
 
 current_cord_button = Button(root, text="Current_Cord", command=current_pos)
 current_cord_button.pack()
-
+"""
 current_x1 = root.winfo_x()
 current_y2 = root.winfo_y
 
