@@ -27,17 +27,13 @@ x = (screen_width/2) - (100/2)
 y = (screen_height/2) - (100/2)
 root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
 
-variable = StringVar()
+face_holder = StringVar()
 
-random_text = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ"]
+random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ"]
 
 def update_label():
-    i = 0
-    #time.sleep(1)
-    if (i >= 4):
-        i = 0
-    variable.set(str(random_text[i]))
-    i += 1
+    i = random.randrange(6)
+    face_holder.set(str(random_faces[i]))
     root.update()
 
 def update_pos():
@@ -65,7 +61,7 @@ def update_pos():
         root.geometry("100x100" + "+" + str(-root.winfo_x()) + "+" + str(-root.winfo_x()))
     root.update()
 
-face = Label(root, textvariable=variable)
+face = Label(root, textvariable=face_holder)
 face.place(relx=.5, rely=.5, anchor="center")
 """
 start_button = Button(root, text="start", command=update_label)
@@ -100,8 +96,8 @@ while True:
         #    time.sleep(0.1)
             update_pos()
     if (internal_option == 1):
-        time.sleep(0.1)
         update_label()
+        time.sleep(0.1)
 
 # Keep running window
 root.mainloop()
