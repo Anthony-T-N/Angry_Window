@@ -44,16 +44,20 @@ def update_pos():
     if (random_option == 0):
         current_x += 5
         current_y += 5
-    if (random_option == 1):
+    elif (random_option == 1):
         current_x -= 5
         current_y -= 5
-    if (random_option == 2):
+    elif (random_option == 2):
         current_x += 5
         current_y -= 5
-    if (random_option == 3):
+    elif (random_option == 3):
         current_x -= 5
         current_y += 5
-    print(current_x, current_y)
+    print("x:", current_x, "y:", current_y)
+    if (current_x <= 0):
+        current_x = 1
+    if (current_y <= 0):
+        current_y = 1
     root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
     if (current_x >= screen_width):
         root.geometry("100x100" + "+" + str(-root.winfo_x()) + "+" + str(-root.winfo_x()))
@@ -69,14 +73,17 @@ start_button.pack()
 """
 
 def current_pos():
-    current_x1 = root.winfo_x()
-    current_y2 = root.winfo_y()
-    if (current_x1 != root.winfo_x() or current_y2 != root.winfo_y):
-        print("Current_Cord")
-        print("x", current_x1)
-        print("y", current_y2)
-    else:
-        pass
+    print("Current_Cord")
+    print("x", root.winfo_x())
+    print("y", root.winfo_y())
+
+def free_fall():
+    while (root.winfo_y() <= 1000):
+        print("Falling")
+        root.geometry("100x100" + "+" + str(root.winfo_x()) + "+" + str(root.winfo_y() + 1))
+        root.update()
+    
+
 
 """
 start_button2 = Button(root, text="Start", command=update_pos)
@@ -87,7 +94,7 @@ current_cord_button.pack()
 """
 current_x1 = root.winfo_x()
 current_y2 = root.winfo_y
-
+"""
 while True:
     internal_option = random.randrange(2)
     print("Internal_Option:", internal_option)
@@ -98,7 +105,27 @@ while True:
     if (internal_option == 1):
         update_label()
         time.sleep(0.1)
+"""
+
+x, y = 0, 0
+def mouse_motion(event):
+    global x, y
+    current_pos()
+    # Positive offset represent the mouse is moving to the lower right corner, negative moving to the upper left corner
+    offset_x, offset_y = event.x - x, event.y - y  
+    new_x = root.winfo_x() + offset_x
+    new_y = root.winfo_y() + offset_y
+    new_geometry = f"+{new_x}+{new_y}"
+    root.geometry(new_geometry)
+    free_fall()
+
+def mouse_press(event):
+    global x, y
+    count = time.time()
+    x, y = event.x, event.y
+
+root.bind("<B1-Motion>", mouse_motion)
+root.bind("<Button-1>", mouse_press)
 
 # Keep running window
 root.mainloop()
-
