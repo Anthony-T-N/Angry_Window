@@ -3,6 +3,7 @@ import time
 import random
 import sys
 
+random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ"]
 # Blank window.
 root = Tk()
 root.title("Evil_Window")
@@ -23,13 +24,12 @@ screen_height = root.winfo_screenheight()
 topFrame = Frame(root)
 topFrame.pack()
 
-x = (screen_width/2) - (100/2)
-y = (screen_height/2) - (100/2)
-root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
+def place_middle_of_screen():
+    x = (screen_width/2) - (100/2)
+    y = (screen_height/2) - (100/2)
+    root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
 
 face_holder = StringVar()
-
-random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ"]
 
 def update_label():
     i = random.randrange(6)
@@ -38,8 +38,7 @@ def update_label():
 
 def update_pos():
     random_option = random.randrange(4)
-    current_x = root.winfo_x()
-    current_y = root.winfo_y()
+    current_x, current_y = root.winfo_x(), root.winfo_y()
     print("Update_Pos", random_option)
     if (random_option == 0):
         current_x += 5
@@ -71,7 +70,6 @@ face.place(relx=.5, rely=.5, anchor="center")
 start_button = Button(root, text="start", command=update_label)
 start_button.pack()
 """
-
 def current_pos():
     print("Current_Cord")
     print("x", root.winfo_x())
@@ -83,8 +81,6 @@ def free_fall():
         root.geometry("100x100" + "+" + str(root.winfo_x()) + "+" + str(root.winfo_y() + 1))
         root.update()
     
-
-
 """
 start_button2 = Button(root, text="Start", command=update_pos)
 start_button2.pack()
@@ -92,8 +88,28 @@ start_button2.pack()
 current_cord_button = Button(root, text="Current_Cord", command=current_pos)
 current_cord_button.pack()
 """
-current_x1 = root.winfo_x()
-current_y2 = root.winfo_y
+
+x, y = 0, 0
+def mouse_motion(event):
+    global x, y
+    current_pos()
+    # Positive offset represent the mouse is moving to the lower right corner, negative moving to the upper left corner
+    offset_x, offset_y = event.x - x, event.y - y  
+    root.geometry('%dx%d+%d+%d' % (100, 100, root.winfo_x() + offset_x, root.winfo_y() + offset_y))
+
+def mouse_press(event):
+    global x, y
+    update_label()
+    x, y = event.x, event.y
+
+def mouse_release(event):
+    free_fall()
+
+root.bind("<B1-Motion>", mouse_motion)
+root.bind("<Button-1>", mouse_press)
+root.bind("<ButtonRelease-1>", mouse_release)
+update_label()
+place_middle_of_screen()
 """
 while True:
     internal_option = random.randrange(2)
@@ -106,26 +122,6 @@ while True:
         update_label()
         time.sleep(0.1)
 """
-
-x, y = 0, 0
-def mouse_motion(event):
-    global x, y
-    current_pos()
-    # Positive offset represent the mouse is moving to the lower right corner, negative moving to the upper left corner
-    offset_x, offset_y = event.x - x, event.y - y  
-    new_x = root.winfo_x() + offset_x
-    new_y = root.winfo_y() + offset_y
-    new_geometry = f"+{new_x}+{new_y}"
-    root.geometry(new_geometry)
-    free_fall()
-
-def mouse_press(event):
-    global x, y
-    count = time.time()
-    x, y = event.x, event.y
-
-root.bind("<B1-Motion>", mouse_motion)
-root.bind("<Button-1>", mouse_press)
-
+        
 # Keep running window
 root.mainloop()
