@@ -2,6 +2,7 @@ from tkinter import *
 import time
 import random
 import sys
+import time
 
 random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ"]
 # Blank window.
@@ -24,12 +25,26 @@ screen_height = root.winfo_screenheight()
 topFrame = Frame(root)
 topFrame.pack()
 
+face_holder = StringVar()
+face = Label(root, textvariable=face_holder, font='TkDefaultFont 12 bold')
+face.place(relx=.5, rely=.5, anchor="center")
+"""
+start_button = Button(root, text="start", command=update_label)
+start_button.pack()
+"""
+
+"""
+start_button2 = Button(root, text="Start", command=update_pos)
+start_button2.pack()
+
+current_cord_button = Button(root, text="Current_Cord", command=current_pos)
+current_cord_button.pack()
+"""
+
 def place_middle_of_screen():
     x = (screen_width/2) - (100/2)
     y = (screen_height/2) - (100/2)
     root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
-
-face_holder = StringVar()
 
 def update_label():
     i = random.randrange(6)
@@ -64,12 +79,6 @@ def update_pos():
         root.geometry("100x100" + "+" + str(-root.winfo_x()) + "+" + str(-root.winfo_x()))
     root.update()
 
-face = Label(root, textvariable=face_holder)
-face.place(relx=.5, rely=.5, anchor="center")
-"""
-start_button = Button(root, text="start", command=update_label)
-start_button.pack()
-"""
 def current_pos():
     print("Current_Cord")
     print("x", root.winfo_x())
@@ -81,14 +90,6 @@ def free_fall():
         root.geometry("100x100" + "+" + str(root.winfo_x()) + "+" + str(root.winfo_y() + 1))
         root.update()
     
-"""
-start_button2 = Button(root, text="Start", command=update_pos)
-start_button2.pack()
-
-current_cord_button = Button(root, text="Current_Cord", command=current_pos)
-current_cord_button.pack()
-"""
-
 x, y = 0, 0
 def mouse_motion(event):
     global x, y
@@ -101,6 +102,14 @@ def mouse_press(event):
     global x, y
     update_label()
     x, y = event.x, event.y
+    oldtime = time.time()
+    print(time.time())
+    while (x == event.x and y == event.y):
+        if (time.time() - oldtime > 2):
+            print("it's been a minute")
+            for i in range(1000):
+                update_pos()
+            break
 
 def mouse_release(event):
     free_fall()
