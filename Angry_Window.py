@@ -4,7 +4,7 @@ import random
 import sys
 import time
 
-random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ"]
+random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
 # Blank window.
 root = Tk()
 root.title("Evil_Window")
@@ -17,7 +17,6 @@ root.resizable(width=False, height=False)
 
 def close(event):
     root.destroy()
-root.bind('<Escape>', close)
 
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
@@ -104,7 +103,8 @@ def mouse_press(event):
     x, y = event.x, event.y
     oldtime = time.time()
     print(time.time())
-    while (x == event.x and y == event.y):
+    while True:
+        print(time.time())
         if (time.time() - oldtime > 2):
             print("it's been a minute")
             for i in range(1000):
@@ -117,6 +117,7 @@ def mouse_release(event):
 root.bind("<B1-Motion>", mouse_motion)
 root.bind("<Button-1>", mouse_press)
 root.bind("<ButtonRelease-1>", mouse_release)
+root.bind('<Escape>', close)
 update_label()
 place_middle_of_screen()
 """
