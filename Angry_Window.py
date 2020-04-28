@@ -36,7 +36,7 @@ start_button.pack()
 start_button2 = Button(root, text="Start", command=update_pos)
 start_button2.pack()
 
-current_cord_button = Button(root, text="Current_Cord", command=current_pos)
+current_cord_button = Button(root, text="Current_Cord", command=show_current_pos)
 current_cord_button.pack()
 """
 
@@ -78,7 +78,7 @@ def update_pos():
         root.geometry("100x100" + "+" + str(-root.winfo_x()) + "+" + str(-root.winfo_x()))
     root.update()
 
-def current_pos():
+def show_current_pos():
     print("Current_Cord")
     print("x", root.winfo_x())
     print("y", root.winfo_y())
@@ -92,7 +92,7 @@ def free_fall():
 x, y = 0, 0
 def mouse_motion(event):
     global x, y
-    current_pos()
+    show_current_pos()
     # Positive offset represent the mouse is moving to the lower right corner, negative moving to the upper left corner
     offset_x, offset_y = event.x - x, event.y - y  
     root.geometry('%dx%d+%d+%d' % (100, 100, root.winfo_x() + offset_x, root.winfo_y() + offset_y))
@@ -101,15 +101,19 @@ def mouse_press(event):
     global x, y
     update_label()
     x, y = event.x, event.y
-    oldtime = time.time()
-    print(time.time())
-    while True:
-        print(time.time())
-        if (time.time() - oldtime > 2):
-            print("it's been a minute")
-            for i in range(1000):
-                update_pos()
-            break
+    root.after(2000)
+    root.after(1000, window_shake())
+
+def window_shake():
+    #oldtime = time.time()
+    #print(time.time())
+    #while True:
+        #print(time.time())
+        #if (time.time() - oldtime > 2):
+    print("it's been a minute")
+    for i in range(1000):
+        update_pos()
+    
 
 def mouse_release(event):
     free_fall()
