@@ -7,13 +7,15 @@ import time
 random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
 # Blank window.
 root = Tk()
-root.title("Evil_Window")
+root.title("Angry_Window")
 root.geometry("100x100")
 root.configure(bg="#0e4f73")
 root.config(highlightbackground="white", highlightcolor="white", highlightthickness=3)
 root.overrideredirect(True)
 # Fixed window dimensions. Disables maximise button.
 root.resizable(width=False, height=False)
+root.lift()
+root.attributes("-topmost", True)
 
 def close(event):
     root.destroy()
@@ -101,10 +103,11 @@ def mouse_press(event):
     global x, y
     update_label()
     x, y = event.x, event.y
-    root.after(2000)
-    root.after(1000, window_shake())
+    #root.after(2000)
+    #root.after(1000, window_shake())
 
 def window_shake():
+    # May require threading.
     #oldtime = time.time()
     #print(time.time())
     #while True:
@@ -113,7 +116,6 @@ def window_shake():
     print("it's been a minute")
     for i in range(1000):
         update_pos()
-    
 
 def mouse_release(event):
     free_fall()
