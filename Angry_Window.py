@@ -157,5 +157,5 @@ while True:
 root.mainloop()
 
 # TODO: Window moves center of screen and changes center label.
-# TODO: Reorganie code into classes.
+# TODO: Reorganize code into classes.
 
