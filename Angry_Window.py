@@ -41,11 +41,24 @@ start_button2.pack()
 current_cord_button = Button(root, text="Current_Cord", command=show_current_pos)
 current_cord_button.pack()
 """
+x = (screen_width/2) - (100/2)
+y = (screen_height/2) - (100/2)
+root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
+root.update()
 
 def place_middle_of_screen():
+    print("place_middle_of_screen")
     x = (screen_width/2) - (100/2)
     y = (screen_height/2) - (100/2)
     root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
+    print(x, y)
+    while True:
+        if (root.winfo_x() != x, root.winfo_y() != y):
+            root.geometry("100x100" + "+" + str(root.winfo_x() - 1) + "+" + str(root.winfo_y() - 1))
+            root.update()
+        else:
+            print(root.winfo_x(), root.winfo_y())
+            break
 
 def update_label():
     i = random.randrange(6)
@@ -119,13 +132,14 @@ def window_shake():
 
 def mouse_release(event):
     free_fall()
+    place_middle_of_screen()
 
 root.bind("<B1-Motion>", mouse_motion)
 root.bind("<Button-1>", mouse_press)
 root.bind("<ButtonRelease-1>", mouse_release)
 root.bind('<Escape>', close)
 update_label()
-place_middle_of_screen()
+
 """
 while True:
     internal_option = random.randrange(2)
@@ -141,3 +155,7 @@ while True:
         
 # Keep running window
 root.mainloop()
+
+# TODO: Window moves center of screen and changes center label.
+# TODO: Reorganie code into classes.
+
