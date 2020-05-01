@@ -50,12 +50,21 @@ def place_middle_of_screen():
     print("place_middle_of_screen")
     x = (screen_width/2) - (100/2)
     y = (screen_height/2) - (100/2)
-    root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
+    #root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
     print(x, y)
     while True:
         if (root.winfo_x() != x, root.winfo_y() != y):
-            root.geometry("100x100" + "+" + str(root.winfo_x() - 1) + "+" + str(root.winfo_y() - 1))
-            root.update()
+            print("Middle")
+            # Float != Int
+            print(root.winfo_x(), x, root.winfo_y(), y)
+            for i in range(int(root.winfo_x() - x)):
+                root.geometry("100x100" + "+" + str(root.winfo_x() - 1) + "+" + str(root.winfo_y()))
+                root.update()
+            for i in range(int(root.winfo_y()) - int(y)):
+                root.geometry("100x100" + "+" + str(root.winfo_x()) + "+" + str(root.winfo_y() - 1))
+                root.update()
+            #root.geometry("100x100" + "+" + str(root.winfo_x() - 1) + "+" + str(root.winfo_y() - 1))
+            #root.update()
         else:
             print(root.winfo_x(), root.winfo_y())
             break
@@ -157,5 +166,6 @@ while True:
 root.mainloop()
 
 # TODO: Window moves center of screen and changes center label.
-# TODO: Reorganize code into classes.
+# TODO: Reorganie code into classes.
+
 
