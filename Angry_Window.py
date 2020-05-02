@@ -1,3 +1,14 @@
+""" ---
+
+---
+
+"""
+
+__author__ = 'Anthony T Nguyen'
+__version__ = ''
+__date__ = ''
+__status__ = 'Development'
+
 from tkinter import *
 import time
 import random
@@ -52,19 +63,34 @@ def place_middle_of_screen():
     y = (screen_height/2) - (100/2)
     #root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
     print(x, y)
+    x = int(x)
+    y = int(y)
     while True:
         if (root.winfo_x() != x, root.winfo_y() != y):
             print("Middle")
             # Float != Int
-            print(root.winfo_x(), x, root.winfo_y(), y)
-            for i in range(int(root.winfo_x() - x)):
-                root.geometry("100x100" + "+" + str(root.winfo_x() - 1) + "+" + str(root.winfo_y()))
-                root.update()
-            for i in range(int(root.winfo_y()) - int(y)):
-                root.geometry("100x100" + "+" + str(root.winfo_x()) + "+" + str(root.winfo_y() - 1))
-                root.update()
-            #root.geometry("100x100" + "+" + str(root.winfo_x() - 1) + "+" + str(root.winfo_y() - 1))
-            #root.update()
+            print(root.winfo_x(), x)
+            print(root.winfo_y(), y)
+            if (root.winfo_x() >= x, root.winfo_y() >= y):
+                print("Right")
+                for i in range(int(root.winfo_x() - x)):
+                    root.geometry("100x100" + "+" + str(root.winfo_x() - 1) + "+" + str(root.winfo_y()))
+                    root.update()
+                for i in range(int(root.winfo_y()) - int(y)):
+                    root.geometry("100x100" + "+" + str(root.winfo_x()) + "+" + str(root.winfo_y() - 1))
+                    root.update()
+            elif (root.winfo_x() < x, root.winfo_y() < y):
+                print("Left")
+                for i in range(int(root.winfo_x() - x)):
+                    root.geometry("100x100" + "+" + str(root.winfo_x() + 1) + "+" + str(root.winfo_y()))
+                    root.update()
+                for i in range(int(root.winfo_y()) - int(y)):
+                    root.geometry("100x100" + "+" + str(root.winfo_x()) + "+" + str(root.winfo_y() + 1))
+                    root.update()
+
+        # Removing this statement below causes strange behaviour.
+        if (root.winfo_x() == x, root.winfo_y() == y):
+            break
         else:
             print(root.winfo_x(), root.winfo_y())
             break
