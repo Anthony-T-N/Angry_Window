@@ -13,7 +13,6 @@ from tkinter import *
 import time
 import random
 import sys
-import time
 
 random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
 # Blank window.
@@ -71,19 +70,24 @@ def place_middle_of_screen():
             # Float != Int
             print(root.winfo_x(), x)
             print(root.winfo_y(), y)
-            if (root.winfo_x() >= x, root.winfo_y() >= y):
-                print("Right")
+            if (root.winfo_x() >= x):
+                print("Right 1")
                 for i in range(int(root.winfo_x() - x)):
                     root.geometry("100x100" + "+" + str(root.winfo_x() - 1) + "+" + str(root.winfo_y()))
                     root.update()
+            if (root.winfo_x() < x):
+                print("Left 1")
+                for i in range(int(root.winfo_x() - x) * -1):
+                    root.geometry("100x100" + "+" + str(root.winfo_x() + 1) + "+" + str(root.winfo_y()))
+                    root.update()
+            if (root.winfo_y() >= y):
+                print("Right 2")
                 for i in range(int(root.winfo_y()) - int(y)):
                     root.geometry("100x100" + "+" + str(root.winfo_x()) + "+" + str(root.winfo_y() - 1))
                     root.update()
-            elif (root.winfo_x() < x, root.winfo_y() < y):
-                print("Left")
-                for i in range(int(root.winfo_x() - x)):
-                    root.geometry("100x100" + "+" + str(root.winfo_x() + 1) + "+" + str(root.winfo_y()))
-                    root.update()
+            #elif (root.winfo_x() < x, root.winfo_y() < y):
+            if (root.winfo_y() < y):
+                print("Left 2")
                 for i in range(int(root.winfo_y()) - int(y)):
                     root.geometry("100x100" + "+" + str(root.winfo_x()) + "+" + str(root.winfo_y() + 1))
                     root.update()
@@ -193,5 +197,6 @@ root.mainloop()
 
 # TODO: Window moves center of screen and changes center label.
 # TODO: Reorganie code into classes.
+
 
 
