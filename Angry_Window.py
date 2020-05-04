@@ -1,11 +1,13 @@
 """ ---
 
----
+    File name: Angry_Window.py
+    Date created: 04/04/2020
+    Functional Version Finished: 04/05/2020
 
 """
 
 __author__ = 'Anthony T Nguyen'
-__version__ = ''
+__version__ = '1.0.0'
 __date__ = ''
 __status__ = 'Development'
 
@@ -171,32 +173,34 @@ def window_shake():
 
 def mouse_release(event):
     free_fall()
-    place_middle_of_screen()
+
+def self_control(event):
+    while True:
+        internal_option = random.randrange(5)
+        print("Internal_Option:", internal_option)
+        if (internal_option == 0):
+            update_pos()
+        if (internal_option == 1):
+            update_label()
+        if (internal_option == 2):
+            free_fall()
+        if (internal_option == 3):
+            window_shake()
+        if (internal_option == 4):
+            place_middle_of_screen()
 
 root.bind("<B1-Motion>", mouse_motion)
 root.bind("<Button-1>", mouse_press)
 root.bind("<ButtonRelease-1>", mouse_release)
 root.bind('<Escape>', close)
+root.bind('<Shift_L>', self_control)
 update_label()
 
-"""
-while True:
-    internal_option = random.randrange(2)
-    print("Internal_Option:", internal_option)
-    if (internal_option == 0):
-        for i in range(20):
-        #    time.sleep(0.1)
-            update_pos()
-    if (internal_option == 1):
-        update_label()
-        time.sleep(0.1)
-"""
-        
 # Keep running window
 root.mainloop()
 
 # TODO: Window moves center of screen and changes center label.
 # TODO: Reorganie code into classes.
-
+# TODO: Clean up.
 
 
