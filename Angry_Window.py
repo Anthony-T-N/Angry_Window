@@ -16,24 +16,38 @@ import time
 import random
 import sys
 
-random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
-# Blank window.
-root = Tk()
-root.title("Angry_Window")
-root.geometry("100x100")
-root.configure(bg="#0e4f73")
-root.config(highlightbackground="white", highlightcolor="white", highlightthickness=3)
-root.overrideredirect(True)
-# Fixed window dimensions. Disables maximise button.
-root.resizable(width=False, height=False)
-root.lift()
-root.attributes("-topmost", True)
+class Angry_Window:
 
-def close(event):
-    root.destroy()
+    # ~ Constructor
+    def __init__(self, master):
+        random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
+        # Blank window.
+        self.master = master
+        self.frame = tk.Frame(self.master)
+        self.title("Angry_Window")
+        self.geometry("100x100")
+        self.configure(bg="#0e4f73")
+        self.config(highlightbackground="white", highlightcolor="white", highlightthickness=3)
+        self.overrideredirect(True)
+        # Fixed window dimensions. Disables maximise button.
+        self.resizable(width=False, height=False)
+        self.lift()
+        self.attributes("-topmost", True)
+        topFrame = Frame(self.frame)
+        self.frame.pack()
 
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
+        """
+        root = Tk()
+        root.title("Angry_Window")
+        root.geometry("100x100")
+        root.configure(bg="#0e4f73")
+        root.config(highlightbackground="white", highlightcolor="white", highlightthickness=3)
+        root.overrideredirect(True)
+        # Fixed window dimensions. Disables maximise button.
+        root.resizable(width=False, height=False)
+        root.lift()
+        root.attributes("-topmost", True)
+        """
 
 topFrame = Frame(root)
 topFrame.pack()
@@ -41,6 +55,11 @@ topFrame.pack()
 face_holder = StringVar()
 face = Label(root, textvariable=face_holder, font='TkDefaultFont 12 bold')
 face.place(relx=.5, rely=.5, anchor="center")
+
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+
 """
 start_button = Button(root, text="start", command=update_label)
 start_button.pack()
@@ -53,6 +72,7 @@ start_button2.pack()
 current_cord_button = Button(root, text="Current_Cord", command=show_current_pos)
 current_cord_button.pack()
 """
+
 x = (screen_width/2) - (100/2)
 y = (screen_height/2) - (100/2)
 root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
@@ -189,6 +209,9 @@ def self_control(event):
         if (internal_option == 4):
             place_middle_of_screen()
 
+def close(event):
+    root.destroy()
+
 root.bind("<B1-Motion>", mouse_motion)
 root.bind("<Button-1>", mouse_press)
 root.bind("<ButtonRelease-1>", mouse_release)
@@ -199,8 +222,13 @@ update_label()
 # Keep running window
 root.mainloop()
 
-# TODO: Window moves center of screen and changes center label.
+def main(): 
+    root = tk.Tk()
+    app = Angry_Window(root)
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
+
 # TODO: Reorganie code into classes.
 # TODO: Clean up.
-
-
