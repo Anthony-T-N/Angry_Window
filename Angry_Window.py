@@ -20,7 +20,7 @@ class Angry_Window:
 
     # ~ Constructor
     def __init__(self):
-        random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
+        self.random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
         # Blank window.
         self.root = Tk()
         self.root.title("Angry_Window")
@@ -36,14 +36,15 @@ class Angry_Window:
         self.topFrame = Frame(self.root)
         self.topFrame.pack()
 
-        face_holder = StringVar()
-        face = Label(self.root, textvariable=face_holder, font='TkDefaultFont 12 bold')
+        self.face_holder = StringVar()
+        face = Label(self.root, textvariable=self.face_holder, font='TkDefaultFont 12 bold')
         face.place(relx=.5, rely=.5, anchor="center")
 
-        screen_width = self.root.winfo_screenwidth()
-        screen_height = self.root.winfo_screenheight()
-        x = (screen_width/2) - (100/2)
-        y = (screen_height/2) - (100/2)
+        self.root.screen_width = self.root.winfo_screenwidth()
+        self.root.screen_height = self.root.winfo_screenheight()
+
+        x = (self.root.screen_width/2) - (100/2)
+        y = (self.root.screen_height/2) - (100/2)
         self.root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
         self.root.update()
 
@@ -53,6 +54,12 @@ class Angry_Window:
         self.root.bind('<Escape>', self.close)
         self.root.bind('<Shift_L>', self.self_control)
         self.update_label()
+
+        new_window = self.root.Toplevel(self.root)
+        new_window.title("TEST")
+        new_window.geometry("100x100")
+        optimized_canvas = Canvas(new_window)
+        optimized_canvas.pack(fill=BOTH, expand=1)
 
         # Keep running window
         self.root.mainloop()
@@ -102,7 +109,7 @@ class Angry_Window:
 
     def update_label(self):
         i = random.randrange(6)
-        face_holder.set(str(random_faces[i]))
+        self.face_holder.set(str(self.random_faces[i]))
         self.root.update()
 
     def update_pos(self):
@@ -127,9 +134,9 @@ class Angry_Window:
         if (current_y <= 0):
             current_y = 1
         self.root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
-        if (current_x >= screen_width):
+        if (current_x >= self.root.screen_width):
             self.root.geometry("100x100" + "+" + str(-self.root.winfo_x()) + "+" + str(-self.root.winfo_x()))
-        if (current_y >= screen_height or current_y <= 0):
+        if (current_y >= self.root.screen_height or current_y <= 0):
             self.root.geometry("100x100" + "+" + str(-self.root.winfo_x()) + "+" + str(-self.root.winfo_x()))
         self.root.update()
 
@@ -191,8 +198,9 @@ class Angry_Window:
     def close(self, event):
         self.root.destroy()
 
-    def main(self):     
-        Angry_Window()
+def main():     
+    Angry_Window()
+    Angry_Window()
 
 
 if __name__ == "__main__":
