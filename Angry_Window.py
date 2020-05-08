@@ -43,9 +43,7 @@ class Angry_Window:
         self.root.screen_width = self.root.winfo_screenwidth()
         self.root.screen_height = self.root.winfo_screenheight()
 
-        x = (self.root.screen_width/2) - (100/2)
-        y = (self.root.screen_height/2) - (100/2)
-        self.root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
+        self.root.geometry('%dx%d+%d+%d' % (100, 100, ((self.root.screen_width/2) - (100/2)), ((self.root.screen_height/2) - (100/2))))
         self.root.update()
 
         self.root.bind("<B1-Motion>", self.mouse_motion)
@@ -54,15 +52,14 @@ class Angry_Window:
         self.root.bind('<Escape>', self.close)
         self.root.bind('<Shift_L>', self.self_control)
         self.update_label()
-
-        new_window = self.root.Toplevel(self.root)
-        new_window.title("TEST")
-        new_window.geometry("100x100")
-        optimized_canvas = Canvas(new_window)
-        optimized_canvas.pack(fill=BOTH, expand=1)
+        self.window_duplication()
 
         # Keep running window
         self.root.mainloop()
+    
+    def window_duplication(self):
+        for item in range(10):
+            Angry_Window()
 
     def place_middle_of_screen(self):
         print("place_middle_of_screen")
@@ -200,8 +197,6 @@ class Angry_Window:
 
 def main():     
     Angry_Window()
-    Angry_Window()
-
 
 if __name__ == "__main__":
     main()
