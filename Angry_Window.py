@@ -15,11 +15,16 @@ from tkinter import *
 import time
 import random
 import sys
+from threading import Thread
 
-class Angry_Window:
+class Angry_Window(Thread):
 
     # ~ Constructor
     def __init__(self):
+        Thread.__init__(self)
+        self.running = True
+        self.start()
+
         self.random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
         # Blank window.
         self.root = Tk()
@@ -52,14 +57,14 @@ class Angry_Window:
         self.root.bind('<Escape>', self.close)
         self.root.bind('<Shift_L>', self.self_control)
         self.update_label()
-        self.window_duplication()
+        #self.window_duplication()
 
         # Keep running window
         self.root.mainloop()
     
-    def window_duplication(self):
-        for item in range(10):
-            Angry_Window()
+    #def window_duplication(self):
+     #   for item in range(3):
+      #      Angry_Window()
 
     def place_middle_of_screen(self):
         print("place_middle_of_screen")
@@ -196,10 +201,14 @@ class Angry_Window:
         self.root.destroy()
 
 def main():     
-    Angry_Window()
+    thread1 = Angry_Window()
+    thread2 = Angry_Window()
+    thread1.start()
+    thread2.start()
+    thread1.join()
+    thread2.join()
 
 if __name__ == "__main__":
     main()
 
-# TODO: Reorganie code into classes.
 # TODO: Clean up.
