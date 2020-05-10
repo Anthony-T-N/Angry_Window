@@ -15,16 +15,12 @@ from tkinter import *
 import time
 import random
 import sys
-from threading import Thread
+import threading
 
-class Angry_Window(Thread):
+class Angry_Window():
 
     # ~ Constructor
     def __init__(self):
-        Thread.__init__(self)
-        self.running = True
-        self.start()
-
         self.random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
         # Blank window.
         self.root = Tk()
@@ -56,6 +52,7 @@ class Angry_Window(Thread):
         self.root.bind("<ButtonRelease-1>", self.mouse_release)
         self.root.bind('<Escape>', self.close)
         self.root.bind('<Shift_L>', self.self_control)
+        print("Update_label")
         self.update_label()
         #self.window_duplication()
 
@@ -82,23 +79,23 @@ class Angry_Window(Thread):
                 print(self.root.winfo_y(), y)
                 if (self.root.winfo_x() >= x):
                     print("Right 1")
-                    for i in range(int(self.root.winfo_x() - x)):
+                    for _ in range(int(self.root.winfo_x() - x)):
                         self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y()))
                         self.root.update()
                 if (self.root.winfo_x() < x):
                     print("Left 1")
-                    for i in range(int(self.root.winfo_x() - x) * -1):
+                    for _ in range(int(self.root.winfo_x() - x) * -1):
                         self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y()))
                         self.root.update()
                 if (self.root.winfo_y() >= y):
                     print("Right 2")
-                    for i in range(int(self.root.winfo_y()) - int(y)):
+                    for _ in range(int(self.root.winfo_y()) - int(y)):
                         self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 1))
                         self.root.update()
                 #elif (self.root.winfo_x() < x, self.root.winfo_y() < y):
                 if (self.root.winfo_y() < y):
                     print("Left 2")
-                    for i in range(int(self.root.winfo_y()) - int(y)):
+                    for _ in range(int(self.root.winfo_y()) - int(y)):
                         self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 1))
                         self.root.update()
 
@@ -201,12 +198,13 @@ class Angry_Window(Thread):
         self.root.destroy()
 
 def main():     
-    thread1 = Angry_Window()
-    thread2 = Angry_Window()
+    thread1 = threading.Thread(target=Angry_Window)
+    thread2 = threading.Thread(target=Angry_Window)
+    thread3 = threading.Thread(target=Angry_Window)
+
     thread1.start()
     thread2.start()
-    thread1.join()
-    thread2.join()
+    thread3.start()
 
 if __name__ == "__main__":
     main()
