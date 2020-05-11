@@ -11,6 +11,9 @@ __version__ = '1.0.0'
 __date__ = ''
 __status__ = 'Development'
 
+# TODO: Clean up.
+# TODO: Simplify some functions.
+
 from tkinter import *
 import time
 import random
@@ -54,23 +57,14 @@ class Angry_Window():
         self.root.bind('<Shift_L>', self.self_control)
         print("Update_label")
         self.update_label()
-        #self.window_duplication()
 
         # Keep running window
         self.root.mainloop()
-    
-    #def window_duplication(self):
-     #   for item in range(3):
-      #      Angry_Window()
 
     def place_middle_of_screen(self):
         print("place_middle_of_screen")
-        x = (self.root.screen_width/2) - (100/2)
-        y = (self.root.screen_height/2) - (100/2)
-        #self.root.geometry('%dx%d+%d+%d' % (100, 100, x, y))
-        print(x, y)
-        x = int(x)
-        y = int(y)
+        x = int((self.root.screen_width/2) - (100/2))
+        y = int((self.root.screen_height/2) - (100/2))
         while True:
             if (self.root.winfo_x() != x, self.root.winfo_y() != y):
                 print("Middle")
@@ -146,7 +140,7 @@ class Angry_Window():
 
     def free_fall(self):
         while (self.root.winfo_y() <= 1000):
-            print("Falling")
+            print("Falling...")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 1))
             self.root.update()
         
@@ -160,6 +154,7 @@ class Angry_Window():
 
     def mouse_press(self, event):
         global x, y
+        print("Update_label")
         self.update_label()
         x, y = event.x, event.y
         #self.root.after(2000)
@@ -208,5 +203,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# TODO: Clean up.
