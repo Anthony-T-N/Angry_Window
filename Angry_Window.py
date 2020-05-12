@@ -20,15 +20,14 @@ import random
 import sys
 import threading
 
-class Angry_Window(Frame):
+class Angry_Window():
 
     # ~ Constructor
-    def __init__(self, master=None):
-        Frame.__init__(self, master)
+    def __init__(self):
         self.random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
         
+        # Blank window.
         self.root = Tk()
-
         self.root.title("Angry_Window")
         self.root.geometry("100x100")
         self.root.configure(bg="#0e4f73")
@@ -54,8 +53,10 @@ class Angry_Window(Frame):
         self.root.bind("<ButtonRelease-1>", self.mouse_release)
         self.root.bind('<Escape>', self.close)
         self.root.bind('<Shift_L>', self.self_control)
-        print("Update_label")
-        self.update_label()
+        self.root.after(0, self.update_label())
+
+        # Keep running window
+        self.root.mainloop()
 
     def place_middle_of_screen(self):
         print("place_middle_of_screen")
@@ -63,8 +64,6 @@ class Angry_Window(Frame):
         y = int((self.root.screen_height/2) - (100/2))
         while True:
             if (self.root.winfo_x() != x, self.root.winfo_y() != y):
-                print("Middle")
-                # Float != Int
                 print(self.root.winfo_x(), x)
                 print(self.root.winfo_y(), y)
                 if (self.root.winfo_x() >= x):
@@ -97,8 +96,8 @@ class Angry_Window(Frame):
                 break
 
     def update_label(self):
-        i = random.randrange(6)
-        self.face_holder.set(str(self.random_faces[i]))
+        print("Hello")
+        self.face_holder.set(str(self.random_faces[random.randrange(6)]))
         self.root.update()
 
     def update_pos(self):
@@ -164,7 +163,7 @@ class Angry_Window(Frame):
             #print(time.time())
             #if (time.time() - oldtime > 2):
         print("it's been a minute")
-        for i in range(1000):
+        for _ in range(1000):
             self.update_pos()
 
     def mouse_release(self, event):
@@ -189,21 +188,11 @@ class Angry_Window(Frame):
         self.root.destroy()
 
 def main():
-    
-    # Blank window.
-    root = Tk()
-    maint = Angry_Window(master=root)
-    # Keep running window
-    root.mainloop()
-
-    """
-    thread1 = threading.Thread(target=Angry_Window)
-    thread2 = threading.Thread(target=Angry_Window)
-    thread3 = threading.Thread(target=Angry_Window)
-    thread1.start()
-    thread2.start()
-    thread3.start()
-    """
+    list_of_windows = []
+    for _ in range(4):
+        current_thread = threading.Thread(target=Angry_Window)
+        current_thread.start()
+        list_of_windows.append(current_thread)
 
 if __name__ == "__main__":
     main()
