@@ -20,13 +20,15 @@ import random
 import sys
 import threading
 
-class Angry_Window():
+class Angry_Window(Frame):
 
     # ~ Constructor
-    def __init__(self):
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
         self.random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
-        # Blank window.
+        
         self.root = Tk()
+
         self.root.title("Angry_Window")
         self.root.geometry("100x100")
         self.root.configure(bg="#0e4f73")
@@ -37,8 +39,6 @@ class Angry_Window():
         self.root.resizable(width=False, height=False)
         self.root.lift()
         self.root.attributes("-topmost", True)
-        self.topFrame = Frame(self.root)
-        self.topFrame.pack()
 
         self.face_holder = StringVar()
         face = Label(self.root, textvariable=self.face_holder, font='TkDefaultFont 12 bold')
@@ -46,7 +46,6 @@ class Angry_Window():
 
         self.root.screen_width = self.root.winfo_screenwidth()
         self.root.screen_height = self.root.winfo_screenheight()
-
         self.root.geometry('%dx%d+%d+%d' % (100, 100, ((self.root.screen_width/2) - (100/2)), ((self.root.screen_height/2) - (100/2))))
         self.root.update()
 
@@ -57,9 +56,6 @@ class Angry_Window():
         self.root.bind('<Shift_L>', self.self_control)
         print("Update_label")
         self.update_label()
-
-        # Keep running window
-        self.root.mainloop()
 
     def place_middle_of_screen(self):
         print("place_middle_of_screen")
@@ -192,14 +188,22 @@ class Angry_Window():
     def close(self, event):
         self.root.destroy()
 
-def main():     
+def main():
+    
+    # Blank window.
+    root = Tk()
+    maint = Angry_Window(master=root)
+    # Keep running window
+    root.mainloop()
+
+    """
     thread1 = threading.Thread(target=Angry_Window)
     thread2 = threading.Thread(target=Angry_Window)
     thread3 = threading.Thread(target=Angry_Window)
-
     thread1.start()
     thread2.start()
     thread3.start()
+    """
 
 if __name__ == "__main__":
     main()
