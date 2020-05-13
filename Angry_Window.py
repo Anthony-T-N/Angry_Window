@@ -6,6 +6,10 @@
 
 """
 
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
+
 __author__ = 'Anthony T Nguyen'
 __version__ = '1.0.0'
 __date__ = ''
@@ -25,7 +29,6 @@ class Angry_Window():
     # ~ Constructor
     def __init__(self):
         self.random_faces = ["＼(^o^)／", "¯\_(ツ)_/¯", "\ (•◡•) /", "~(˘▾˘~)", "ヽ(•‿•)ノ", "(ﾉ^_^)ﾉ", "ʕっ•ᴥ•ʔっ"]
-        
         # Blank window.
         self.root = Tk()
         self.root.title("Angry_Window")
@@ -33,7 +36,10 @@ class Angry_Window():
         self.root.configure(bg="#0e4f73")
         self.root.config(highlightbackground="white", highlightcolor="white", highlightthickness=3)
         self.root.overrideredirect(True)
-        
+
+        self.root.x = 0
+        self.root.y = 0
+
         # Fixed window dimensions. Disables maximise button.
         self.root.resizable(width=False, height=False)
         self.root.lift()
@@ -139,19 +145,18 @@ class Angry_Window():
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 1))
             self.root.update()
         
-    x, y = 0, 0
     def mouse_motion(self, event):
-        global x, y
+        self.root.x, self.root.y
         self.show_current_pos()
         # Positive offset represent the mouse is moving to the lower right corner, negative moving to the upper left corner
-        offset_x, offset_y = event.x - x, event.y - y  
+        offset_x, offset_y = event.x - self.root.x, event.y - self.root.y  
         self.root.geometry('%dx%d+%d+%d' % (100, 100, self.root.winfo_x() + offset_x, self.root.winfo_y() + offset_y))
 
     def mouse_press(self, event):
-        global x, y
+        self.root.x, self.root.y
         print("Update_label")
         self.update_label()
-        x, y = event.x, event.y
+        self.root.x, self.root.y = event.x, event.y
         #self.root.after(2000)
         #self.root.after(1000, window_shake())
 
@@ -162,7 +167,6 @@ class Angry_Window():
         #while True:
             #print(time.time())
             #if (time.time() - oldtime > 2):
-        print("it's been a minute")
         for _ in range(1000):
             self.update_pos()
 
@@ -175,13 +179,13 @@ class Angry_Window():
             print("Internal_Option:", internal_option)
             if (internal_option == 0):
                 self.update_pos()
-            if (internal_option == 1):
+            elif (internal_option == 1):
                 self.update_label()
-            if (internal_option == 2):
+            elif (internal_option == 2):
                 self.free_fall()
-            if (internal_option == 3):
+            elif (internal_option == 3):
                 self.window_shake()
-            if (internal_option == 4):
+            elif (internal_option == 4):
                 self.place_middle_of_screen()
 
     def close(self, event):
