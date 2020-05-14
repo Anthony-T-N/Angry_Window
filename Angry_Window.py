@@ -17,6 +17,7 @@ __status__ = 'Development'
 
 # TODO: Clean up.
 # TODO: Simplify some functions.
+# TODO: Determine why duplicated windows not updating labels.
 
 from tkinter import *
 import time
@@ -36,7 +37,6 @@ class Angry_Window():
         self.root.configure(bg="#0e4f73")
         self.root.config(highlightbackground="white", highlightcolor="white", highlightthickness=3)
         self.root.overrideredirect(True)
-
         self.root.x = 0
         self.root.y = 0
 
@@ -49,11 +49,13 @@ class Angry_Window():
         face = Label(self.root, textvariable=self.face_holder, font='TkDefaultFont 12 bold')
         face.place(relx=.5, rely=.5, anchor="center")
 
+        # Place middle of screen.
         self.root.screen_width = self.root.winfo_screenwidth()
         self.root.screen_height = self.root.winfo_screenheight()
         self.root.geometry('%dx%d+%d+%d' % (100, 100, ((self.root.screen_width/2) - (100/2)), ((self.root.screen_height/2) - (100/2))))
         self.root.update()
 
+        # Root binding.
         self.root.bind("<B1-Motion>", self.mouse_motion)
         self.root.bind("<Button-1>", self.mouse_press)
         self.root.bind("<ButtonRelease-1>", self.mouse_release)
@@ -87,7 +89,6 @@ class Angry_Window():
                     for _ in range(int(self.root.winfo_y()) - int(y)):
                         self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 1))
                         self.root.update()
-                #elif (self.root.winfo_x() < x, self.root.winfo_y() < y):
                 if (self.root.winfo_y() < y):
                     print("Left 2")
                     for _ in range(int(self.root.winfo_y()) - int(y)):
@@ -102,7 +103,6 @@ class Angry_Window():
                 break
 
     def update_label(self):
-        print("Hello")
         self.face_holder.set(str(self.random_faces[random.randrange(6)]))
         self.root.update()
 
@@ -135,7 +135,7 @@ class Angry_Window():
         self.root.update()
 
     def show_current_pos(self):
-        print("Current_Cord")
+        print("Current_Coordinates")
         print("x", self.root.winfo_x())
         print("y", self.root.winfo_y())
 
