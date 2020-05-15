@@ -61,6 +61,7 @@ class Angry_Window():
         self.root.bind("<ButtonRelease-1>", self.mouse_release)
         self.root.bind('<Escape>', self.close)
         self.root.bind('<Shift_L>', self.self_control)
+        self.root.bind('<Control_L>', self.mouse_control)
         self.root.after(0, self.update_label())
 
         # Keep running window
@@ -172,6 +173,11 @@ class Angry_Window():
 
     def mouse_release(self, event):
         self.free_fall()
+
+    def mouse_control(self, event):
+        x2 = self.root.winfo_pointerx() - self.root.winfo_rootx()
+        y2 = self.root.winfo_pointery() - self.root.winfo_rooty()
+        print(x2, y2, self.root.winfo_x(), self.root.winfo_y())
 
     def self_control(self, event):
         while True:
