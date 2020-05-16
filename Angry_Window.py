@@ -124,6 +124,7 @@ class Angry_Window():
             current_x -= 5
             current_y += 5
         print("x:", current_x, "y:", current_y)
+        # Fix these two conditions below. Causes window to jump from bottom of screen to left-top corner.
         if (current_x <= 0):
             current_x = 1
         if (current_y <= 0):
