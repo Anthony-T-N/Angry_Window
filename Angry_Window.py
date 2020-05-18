@@ -61,7 +61,7 @@ class Angry_Window():
         self.root.bind("<ButtonRelease-1>", self.mouse_release)
         self.root.bind('<Escape>', self.close)
         self.root.bind('<Shift_L>', self.self_control)
-        self.root.bind('<Control_L>', self.mouse_control)
+        self.root.bind('<Control_L>', self.follow_mouse)
         self.root.after(0, self.update_label())
 
         # Keep running window
@@ -126,9 +126,9 @@ class Angry_Window():
         print("x:", current_x, "y:", current_y)
         # Fix these two conditions below. Causes window to jump from bottom of screen to left-top corner.
         if (current_x <= 0):
-            current_x = 1
+            current_x = (-current_x)
         if (current_y <= 0):
-            current_y = 1
+            current_y = (-current_y)
         self.root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
         if (current_x >= self.root.screen_width):
             self.root.geometry("100x100" + "+" + str(-self.root.winfo_x()) + "+" + str(-self.root.winfo_x()))
@@ -159,23 +159,16 @@ class Angry_Window():
         print("Update_label")
         self.update_label()
         self.root.x, self.root.y = event.x, event.y
-        #self.root.after(2000)
-        #self.root.after(1000, window_shake())
 
     def window_shake(self):
-        # May require threading.
-        #oldtime = time.time()
-        #print(time.time())
-        #while True:
-            #print(time.time())
-            #if (time.time() - oldtime > 2):
         for _ in range(1000):
             self.update_pos()
 
     def mouse_release(self, event):
         self.free_fall()
 
-    def mouse_control(self, event):
+    def follow_mouse(self, event):
+        # Determine position of window and cursor.
         x2 = self.root.winfo_pointerx() - self.root.winfo_rootx()
         y2 = self.root.winfo_pointery() - self.root.winfo_rooty()
         print(x2, y2, self.root.winfo_x(), self.root.winfo_y())
@@ -207,3 +200,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
