@@ -35,6 +35,7 @@ class Angry_Window():
         self.root.title("Angry_Window")
         self.root.geometry("100x100")
         self.root.configure(bg="#0e4f73")
+        self.root.config(cursor='heart')
         self.root.config(highlightbackground="white", highlightcolor="white", highlightthickness=3)
         self.root.overrideredirect(True)
         self.root.x = 0
@@ -169,9 +170,18 @@ class Angry_Window():
 
     def follow_mouse(self, event):
         # Determine position of window and cursor.
-        x2 = self.root.winfo_pointerx() - self.root.winfo_rootx()
-        y2 = self.root.winfo_pointery() - self.root.winfo_rooty()
+
+        # Returns absolute mouse co-ordinate.
+        # Awful variable names, please change.
+        x2 = self.root.winfo_pointerx()
+        y2 = self.root.winfo_pointery()
         print(x2, y2, self.root.winfo_x(), self.root.winfo_y())
+
+        if (self.root.winfo_x() > self.root.winfo_pointerx()):
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_x()))
+        self.root.update()
+
+
 
     def self_control(self, event):
         while True:
@@ -192,12 +202,16 @@ class Angry_Window():
         self.root.destroy()
 
 def main():
+    Angry_Window()
+    """
     list_of_windows = []
     for _ in range(4):
         current_thread = threading.Thread(target=Angry_Window)
         current_thread.start()
         list_of_windows.append(current_thread)
+    """
 
 if __name__ == "__main__":
     main()
+
 
