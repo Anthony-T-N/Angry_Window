@@ -169,27 +169,28 @@ class Angry_Window():
         self.free_fall()
 
     def follow_mouse(self, event):
-        # Determine position of window and cursor.
-
-        # Returns absolute mouse co-ordinate.
+        while True:
         # Awful variable names, please change.
-        x2 = self.root.winfo_pointerx()
-        y2 = self.root.winfo_pointery()
-        print("x:", x2, "y:", y2, self.root.winfo_x(), self.root.winfo_y())
+            current_mouse_x = self.root.winfo_pointerx()
+            current_mouse_y = self.root.winfo_pointery()
+            print("x:", current_mouse_x, "y:", current_mouse_y, "x:", self.root.winfo_x(), "y:", self.root.winfo_y())
+            print("x:", current_mouse_x, "y:", current_mouse_y, "x:", self.root.winfo_rootx(), "y:", self.root.winfo_rooty())
 
-        if (self.root.winfo_x() > self.root.winfo_pointerx()):
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 10) + "+" + str(self.root.winfo_y()))
-            self.root.update()
-        if (self.root.winfo_x() < self.root.winfo_pointerx()):
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 10) + "+" + str(self.root.winfo_y()))
-            self.root.update()
-        if (self.root.winfo_y() > self.root.winfo_pointery()):
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 10))
-        if (self.root.winfo_y() < self.root.winfo_pointery()):
-            self.root.update()
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 10))
-            self.root.update()
-        self.root.update()
+            if (self.root.winfo_x() > self.root.winfo_pointerx() - 50):
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 15) + "+" + str(self.root.winfo_y()))
+                self.root.update()
+            
+            if (self.root.winfo_x() < self.root.winfo_pointerx() - 50):
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 15) + "+" + str(self.root.winfo_y()))
+                self.root.update()
+            
+            if (self.root.winfo_y() > self.root.winfo_pointery() - 50):
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 15))
+                self.root.update()
+            
+            if (self.root.winfo_y() < self.root.winfo_pointery() - 50):
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 15))
+                self.root.update()
 
     def self_control(self, event):
         while True:
