@@ -175,13 +175,21 @@ class Angry_Window():
         # Awful variable names, please change.
         x2 = self.root.winfo_pointerx()
         y2 = self.root.winfo_pointery()
-        print(x2, y2, self.root.winfo_x(), self.root.winfo_y())
+        print("x:", x2, "y:", y2, self.root.winfo_x(), self.root.winfo_y())
 
         if (self.root.winfo_x() > self.root.winfo_pointerx()):
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_x()))
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 10) + "+" + str(self.root.winfo_y()))
+            self.root.update()
+        if (self.root.winfo_x() < self.root.winfo_pointerx()):
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 10) + "+" + str(self.root.winfo_y()))
+            self.root.update()
+        if (self.root.winfo_y() > self.root.winfo_pointery()):
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 10))
+        if (self.root.winfo_y() < self.root.winfo_pointery()):
+            self.root.update()
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 10))
+            self.root.update()
         self.root.update()
-
-
 
     def self_control(self, event):
         while True:
@@ -213,5 +221,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
