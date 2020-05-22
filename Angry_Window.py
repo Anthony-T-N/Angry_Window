@@ -63,7 +63,8 @@ class Angry_Window():
         self.root.bind('<Escape>', self.close)
         self.root.bind('<Shift_L>', self.self_control)
         self.root.bind('<Control_L>', self.follow_mouse)
-        self.root.after(0, self.update_label())
+        
+        # self.root.after(0, self.update_label())
 
         # Keep running window
         self.root.mainloop()
@@ -152,7 +153,7 @@ class Angry_Window():
         self.root.x, self.root.y
         self.show_current_pos()
         # Positive offset represent the mouse is moving to the lower right corner, negative moving to the upper left corner
-        offset_x, offset_y = event.x - self.root.x, event.y - self.root.y  
+        offset_x, offset_y = event.x - self.root.x, event.y - self.root.y
         self.root.geometry('%dx%d+%d+%d' % (100, 100, self.root.winfo_x() + offset_x, self.root.winfo_y() + offset_y))
 
     def mouse_press(self, event):
@@ -170,12 +171,12 @@ class Angry_Window():
 
     def follow_mouse(self, event):
         while True:
-        # Awful variable names, please change.
             current_mouse_x = self.root.winfo_pointerx()
             current_mouse_y = self.root.winfo_pointery()
             print("x:", current_mouse_x, "y:", current_mouse_y, "x:", self.root.winfo_x(), "y:", self.root.winfo_y())
             print("x:", current_mouse_x, "y:", current_mouse_y, "x:", self.root.winfo_rootx(), "y:", self.root.winfo_rooty())
 
+            # Negative offset for cursor to reach middle of window.
             if (self.root.winfo_x() > self.root.winfo_pointerx() - 50):
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 15) + "+" + str(self.root.winfo_y()))
                 self.root.update()
