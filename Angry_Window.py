@@ -20,7 +20,6 @@ __status__ = 'Development'
 # TODO: Determine why duplicated windows not updating labels.
 
 from tkinter import *
-import time
 import random
 import sys
 import threading
@@ -63,9 +62,7 @@ class Angry_Window():
         self.root.bind('<Escape>', self.close)
         self.root.bind('<Shift_L>', self.self_control)
         self.root.bind('<Control_L>', self.follow_mouse)
-        
-        # self.root.after(0, self.update_label())
-
+        self.root.bind('<Control_R>', self.window_movement)
         # Keep running window
         self.root.mainloop()
 
@@ -194,6 +191,12 @@ class Angry_Window():
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 1))
                 self.root.update()
 
+    def window_movement(self, event):
+        print("Function: window_movement")
+        self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 10) + "+" + str(self.root.winfo_y()))
+        self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 10))
+        self.root.update()
+
     def self_control(self, event):
         while True:
             internal_option = random.randrange(5)
@@ -224,5 +227,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
