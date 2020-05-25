@@ -193,9 +193,17 @@ class Angry_Window():
 
     def window_movement(self, event):
         print("Function: window_movement")
-        self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 10) + "+" + str(self.root.winfo_y()))
-        self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 10))
-        self.root.update()
+        while True:
+            internal_option = random.randrange(5)
+            print("Internal_Option:", internal_option)
+            self.update_label()
+            if (internal_option == 0):
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 10) + "+" + str(self.root.winfo_y()))
+            if (internal_option == 1):
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 10) + "+" + str(self.root.winfo_y()))
+            if (internal_option == 2):
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 10))
+            self.root.update()
 
     def self_control(self, event):
         while True:
@@ -227,6 +235,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
