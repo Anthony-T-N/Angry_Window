@@ -23,6 +23,7 @@ from tkinter import *
 import random
 import sys
 import threading
+import time
 
 class Angry_Window():
 
@@ -187,7 +188,7 @@ class Angry_Window():
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 1))
                 self.root.update()
             
-            if (self.root.winfo_y() < self.root.winfo_pointery() - 50):
+            if (self.root.winfo_y() < self.root.winfo_pointery() - 50):  
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 1))
                 self.root.update()
 
@@ -198,11 +199,20 @@ class Angry_Window():
             print("Internal_Option:", internal_option)
             self.update_label()
             if (internal_option == 0):
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 10) + "+" + str(self.root.winfo_y()))
+                for _ in range(10):
+                    self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 10) + "+" + str(self.root.winfo_y()))
+                    self.root.update()
+                time.sleep(1)
             if (internal_option == 1):
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 10) + "+" + str(self.root.winfo_y()))
+                for _ in range(10):
+                    self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 10) + "+" + str(self.root.winfo_y()))
+                    self.root.update()
+                time.sleep(1)
             if (internal_option == 2):
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 10))
+                for _ in range(10):
+                    self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 10))
+                    self.root.update()
+                time.sleep(1)
             self.root.update()
 
     def self_control(self, event):
