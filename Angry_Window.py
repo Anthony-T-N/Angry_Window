@@ -188,29 +188,38 @@ class Angry_Window():
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 1))
                 self.root.update()
             
-            if (self.root.winfo_y() < self.root.winfo_pointery() - 50):  
+            if (self.root.winfo_y() < self.root.winfo_pointery() - 50):
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 1))
                 self.root.update()
 
     def window_movement(self, event):
         print("Function: window_movement")
         while True:
-            internal_option = random.randrange(5)
+            internal_option = random.randrange(4)
             print("Internal_Option:", internal_option)
             self.update_label()
             if (internal_option == 0):
+                print("->")
                 for _ in range(10):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 10) + "+" + str(self.root.winfo_y()))
                     self.root.update()
                 time.sleep(1)
             if (internal_option == 1):
+                print("<-")
                 for _ in range(10):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 10) + "+" + str(self.root.winfo_y()))
                     self.root.update()
                 time.sleep(1)
             if (internal_option == 2):
+                print("^")
                 for _ in range(10):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 10))
+                    self.root.update()
+                time.sleep(1)
+            if (internal_option == 3):
+                print("!")
+                for _ in range(10):
+                    self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 10))
                     self.root.update()
                 time.sleep(1)
             self.root.update()
@@ -245,3 +254,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
