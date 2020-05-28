@@ -157,6 +157,7 @@ class Angry_Window():
     def mouse_press(self, event):
         self.root.x, self.root.y
         print("Update_label")
+        self.window_colour_change()
         self.update_label()
         self.root.x, self.root.y = event.x, event.y
 
@@ -166,6 +167,15 @@ class Angry_Window():
 
     def mouse_release(self, event):
         self.free_fall()
+
+    def window_colour_change(self):
+        for _ in range(10):
+            internal_option = random.randrange(4)
+            colour_list = ["0e4f73", "DBDE31", "266D15", "D21F37"]
+            print("#" + colour_list[internal_option])
+            self.root.configure(bg="#" + colour_list[internal_option])
+            self.root.update()
+            time.sleep(0.1)
 
     def follow_mouse(self, event):
         while True:
@@ -254,4 +264,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
