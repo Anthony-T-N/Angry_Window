@@ -143,7 +143,8 @@ class Angry_Window():
         print("y", self.root.winfo_y())
 
     def free_fall(self):
-        while (self.root.winfo_y() <= 1000):
+        # Value hard-coded. Make dynamic based on screen window dimension.
+        while (self.root.winfo_y() <= (self.root.winfo_screenheight() - 100)):
             print("Falling...")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 1))
             self.root.update()
@@ -265,6 +266,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
