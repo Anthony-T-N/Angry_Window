@@ -64,6 +64,8 @@ class Angry_Window():
         self.root.bind('<Shift_L>', self.self_control)
         self.root.bind('<Control_L>', self.follow_mouse)
         self.root.bind('<Control_R>', self.window_movement)
+        # Function bind test
+        self.root.bind('<space>', self.pos_spasm)
         # Keep running window
         self.root.mainloop()
 
@@ -108,10 +110,10 @@ class Angry_Window():
         self.face_holder.set(str(self.random_faces[random.randrange(6)]))
         self.root.update()
 
-    def update_pos(self):
+    def pos_spasm(self, event):
         random_option = random.randrange(4)
         current_x, current_y = self.root.winfo_x(), self.root.winfo_y()
-        print("Update_Pos", random_option)
+        print("pos_spasm", random_option)
         if (random_option == 0):
             current_x += 5
             current_y += 5
@@ -126,15 +128,17 @@ class Angry_Window():
             current_y += 5
         print("x:", current_x, "y:", current_y)
         # Fix these two conditions below. Causes window to jump from bottom of screen to left-top corner.
+        """
         if (current_x <= 0):
             current_x = (-current_x)
         if (current_y <= 0):
             current_y = (-current_y)
+        """
         self.root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
         if (current_x >= self.root.screen_width):
-            self.root.geometry("100x100" + "+" + str(-self.root.winfo_x()) + "+" + str(-self.root.winfo_x()))
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
         if (current_y >= self.root.screen_height or current_y <= 0):
-            self.root.geometry("100x100" + "+" + str(-self.root.winfo_x()) + "+" + str(-self.root.winfo_x()))
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 50))
         self.root.update()
 
     def show_current_pos(self):
@@ -164,7 +168,7 @@ class Angry_Window():
 
     def window_shake(self):
         for _ in range(1000):
-            self.update_pos()
+            self.pos_spasm()
 
     def mouse_release(self, event):
         self.free_fall()
@@ -241,7 +245,7 @@ class Angry_Window():
             internal_option = random.randrange(5)
             print("Internal_Option:", internal_option)
             if (internal_option == 0):
-                self.update_pos()
+                self.pos_spasm()
             elif (internal_option == 1):
                 self.update_label()
             elif (internal_option == 2):
@@ -266,7 +270,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 
