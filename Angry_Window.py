@@ -110,7 +110,7 @@ class Angry_Window():
         self.face_holder.set(str(self.random_faces[random.randrange(6)]))
         self.root.update()
 
-    def pos_spasm(self, event):
+    def pos_spasm(self):
         random_option = random.randrange(4)
         current_x, current_y = self.root.winfo_x(), self.root.winfo_y()
         print("pos_spasm", random_option)
@@ -136,9 +136,15 @@ class Angry_Window():
         """
         self.root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
         if (current_x >= self.root.screen_width):
+            print(current_x, ">=", self.root.screen_width, " ====== Refocus on x")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
+        
+        # === Fix
         if (current_y >= self.root.screen_height or current_y <= 0):
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 50))
+            print(current_y, ">=", self.root.screen_height, " ====== Refocus on y")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 5))
+        # ===
+
         self.root.update()
 
     def show_current_pos(self):
