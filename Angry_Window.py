@@ -138,13 +138,12 @@ class Angry_Window():
         if (current_x >= self.root.screen_width):
             print(current_x, ">=", self.root.screen_width, " ====== Refocus on x")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
-        
-        # === Fix
-        if (current_y >= self.root.screen_height or current_y <= 0):
-            print(current_y, ">=", self.root.screen_height, " ====== Refocus on y")
+        if (current_y <= 0):
+            print(current_y, ">=", "0", " ====== Refocus on y")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 5))
-        # ===
-
+        if (current_y >= self.root.screen_height):
+            print(current_y, ">=", self.root.screen_height, " ====== Refocus on y")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 5))
         self.root.update()
 
     def show_current_pos(self):
@@ -276,6 +275,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
 
