@@ -127,14 +127,11 @@ class Angry_Window():
             current_x -= 5
             current_y += 5
         print("x:", current_x, "y:", current_y)
-        # Fix these two conditions below. Causes window to jump from bottom of screen to left-top corner.
-        """
-        if (current_x <= 0):
-            current_x = (-current_x)
-        if (current_y <= 0):
-            current_y = (-current_y)
-        """
+
         self.root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
+        if (current_x <= 0):
+            print(current_x, "<=", self.root.screen_width, " ====== Refocus on x")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 5) + "+" + str(self.root.winfo_y()))
         if (current_x >= self.root.screen_width):
             print(current_x, ">=", self.root.screen_width, " ====== Refocus on x")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
@@ -275,4 +272,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
