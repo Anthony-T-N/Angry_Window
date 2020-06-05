@@ -242,6 +242,20 @@ class Angry_Window():
                 time.sleep(1)
             self.root.update()
 
+            if (self.root.winfo_x() <= 0):
+                print(self.root.winfo_x(), "<=", self.root.screen_width, " ====== Refocus on x")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 5) + "+" + str(self.root.winfo_y()))
+            if (self.root.winfo_x() >= self.root.screen_width):
+                print(self.root.winfo_x(), ">=", self.root.screen_width, " ====== Refocus on x")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
+            if (self.root.winfo_y() <= 0):
+                print(self.root.winfo_y(), ">=", "0", " ====== Refocus on y")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 5))
+            if (self.root.winfo_y() >= self.root.screen_height):
+                print(self.root.winfo_y(), ">=", self.root.screen_height, " ====== Refocus on y")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 5))
+            self.root.update()
+
     def self_control(self, event):
         while True:
             internal_option = random.randrange(5)
@@ -272,5 +286,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
