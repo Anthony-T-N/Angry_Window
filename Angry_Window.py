@@ -130,16 +130,16 @@ class Angry_Window():
 
         self.root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
         if (current_x <= 0):
-            print(current_x, "<=", self.root.screen_width, " ====== Refocus on x")
+            print(current_x, "<=", self.root.screen_width, "Refocus back on x")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 5) + "+" + str(self.root.winfo_y()))
         if (current_x >= self.root.screen_width):
-            print(current_x, ">=", self.root.screen_width, " ====== Refocus on x")
+            print(current_x, ">=", self.root.screen_width, "Refocus back on x")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
         if (current_y <= 0):
-            print(current_y, ">=", "0", " ====== Refocus on y")
+            print(current_y, ">=", "0", "Refocus back on y")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 5))
         if (current_y >= self.root.screen_height):
-            print(current_y, ">=", self.root.screen_height, " ====== Refocus on y")
+            print(current_y, ">=", self.root.screen_height, "Refocus back on y")
             self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 5))
         self.root.update()
 
@@ -215,6 +215,8 @@ class Angry_Window():
         while True:
             internal_option = random.randrange(4)
             print("Internal_Option:", internal_option)
+            print("x:", self.root.winfo_x(), "y:", self.root.winfo_y())
+            print("x:", self.root.winfo_rootx(), "y:", self.root.winfo_rooty())
             self.update_label()
             if (internal_option == 0):
                 print("->")
@@ -241,20 +243,26 @@ class Angry_Window():
                     self.root.update()
                 time.sleep(1)
             self.root.update()
+            self.root.window_border_check()
 
-            if (self.root.winfo_x() <= 0):
-                print(self.root.winfo_x(), "<=", self.root.screen_width, " ====== Refocus on x")
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 5) + "+" + str(self.root.winfo_y()))
-            if (self.root.winfo_x() >= self.root.screen_width):
-                print(self.root.winfo_x(), ">=", self.root.screen_width, " ====== Refocus on x")
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
-            if (self.root.winfo_y() <= 0):
-                print(self.root.winfo_y(), ">=", "0", " ====== Refocus on y")
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 5))
-            if (self.root.winfo_y() >= self.root.screen_height):
-                print(self.root.winfo_y(), ">=", self.root.screen_height, " ====== Refocus on y")
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 5))
+    def window_border_check(self, event):
+        if (self.root.winfo_x() <= 0):
+            print(self.root.winfo_x(), "<=", self.root.screen_width, "Refocus back on x")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 5) + "+" + str(self.root.winfo_y()))
             self.root.update()
+        if (self.root.winfo_x() >= self.root.screen_width):
+            print(self.root.winfo_x(), ">=", self.root.screen_width, "Refocus back on x")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
+            self.root.update()
+        if (self.root.winfo_y() <= 0):
+            print(self.root.winfo_y(), ">=", "0", "Refocus back on y")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 5))
+            self.root.update()
+        if (self.root.winfo_y() >= self.root.screen_height):
+            print(self.root.winfo_y(), ">=", self.root.screen_height, "Refocus back on y")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 5))
+            self.root.update()
+        self.root.update()
 
     def self_control(self, event):
         while True:
