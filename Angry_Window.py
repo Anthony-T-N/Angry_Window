@@ -64,8 +64,6 @@ class Angry_Window():
         self.root.bind('<Shift_L>', self.self_control)
         self.root.bind('<Control_L>', self.follow_mouse)
         self.root.bind('<Control_R>', self.window_movement)
-        # Function bind test
-        self.root.bind('<space>', self.pos_spasm)
         # Keep running window
         self.root.mainloop()
 
@@ -129,7 +127,23 @@ class Angry_Window():
         print("x:", current_x, "y:", current_y)
 
         self.root.geometry("100x100" + "+" + str(current_x) + "+" + str(current_y))
-        self.root.window_border_check()
+        if (self.root.winfo_x() <= 0):
+            print(self.root.winfo_x(), "<=", self.root.screen_width, "Refocus back on x")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 5) + "+" + str(self.root.winfo_y()))
+            self.root.update()
+        if (self.root.winfo_x() >= self.root.screen_width):
+            print(self.root.winfo_x(), ">=", self.root.screen_width, "Refocus back on x")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
+            self.root.update()
+        if (self.root.winfo_y() <= 0):
+            print(self.root.winfo_y(), ">=", "0", "Refocus back on y")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 5))
+            self.root.update()
+        if (self.root.winfo_y() >= self.root.screen_height):
+            print(self.root.winfo_y(), ">=", self.root.screen_height, "Refocus back on y")
+            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 5))
+            self.root.update()
+        self.root.update()
 
     def show_current_pos(self):
         print("Current_Coordinates")
@@ -231,27 +245,24 @@ class Angry_Window():
                     self.root.update()
                 time.sleep(1)
             self.root.update()
-            self.root.free_fall()
-            self.root.window_border_check()
-
-    def window_border_check(self):
-        if (self.root.winfo_x() <= 0):
-            print(self.root.winfo_x(), "<=", self.root.screen_width, "Refocus back on x")
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 5) + "+" + str(self.root.winfo_y()))
+            
+            if (self.root.winfo_x() <= 0):
+                print(self.root.winfo_x(), "<=", self.root.screen_width, "Refocus back on x")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 5) + "+" + str(self.root.winfo_y()))
+                self.root.update()
+            if (self.root.winfo_x() >= self.root.screen_width):
+                print(self.root.winfo_x(), ">=", self.root.screen_width, "Refocus back on x")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
+                self.root.update()
+            if (self.root.winfo_y() <= 0):
+                print(self.root.winfo_y(), ">=", "0", "Refocus back on y")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 5))
+                self.root.update()
+            if (self.root.winfo_y() >= self.root.screen_height):
+                print(self.root.winfo_y(), ">=", self.root.screen_height, "Refocus back on y")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 5))
+                self.root.update()
             self.root.update()
-        if (self.root.winfo_x() >= self.root.screen_width):
-            print(self.root.winfo_x(), ">=", self.root.screen_width, "Refocus back on x")
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 5) + "+" + str(self.root.winfo_y()))
-            self.root.update()
-        if (self.root.winfo_y() <= 0):
-            print(self.root.winfo_y(), ">=", "0", "Refocus back on y")
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() + 5))
-            self.root.update()
-        if (self.root.winfo_y() >= self.root.screen_height):
-            print(self.root.winfo_y(), ">=", self.root.screen_height, "Refocus back on y")
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x()) + "+" + str(self.root.winfo_y() - 5))
-            self.root.update()
-        self.root.update()
 
     def self_control(self, event):
         while True:
