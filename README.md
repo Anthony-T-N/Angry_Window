@@ -4,4 +4,4 @@
 ![support](https://img.shields.io/badge/OS-Windows-orange.svg)
 
 # Angry_Window
-A fun project involving the extensive use of the Tkinter module to create a small a window that performs various actions.
+A fun project involving the extensive use of the Tkinter module to create a small window that performs various actions.
