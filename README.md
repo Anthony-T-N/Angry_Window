@@ -9,7 +9,9 @@ A fun project involving the extensive use of the Tkinter module to create a smal
 
 Functions
 -
-- Moving to the center of the screen
+- Moving to the center of the screen.
+- Simulating the movement of falling.
+- Following the mouse cursor/pointer.
 
 
 Usage
