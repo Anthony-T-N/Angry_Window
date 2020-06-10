@@ -5,10 +5,12 @@
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Anthony-T-N/Angry_Window)
 
 # Angry_Window
-A fun project involving the extensive use of the Tkinter module to create a small window that performs various actions.
+A fun project involving the extensive use of the Tkinter module to create a small window that performs various random actions/functions.
 
-Features
+Functions
 -
+- Moving to the center of the screen
+
 
 Usage
 -
