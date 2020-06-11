@@ -12,6 +12,8 @@ Functions
 - Moving to the center of the screen.
 - Simulating the movement of falling.
 - Following the mouse cursor/pointer.
+- Shaking violently in a spot.
+- Moving around the screen in random directions periodically.
 
 
 Usage
