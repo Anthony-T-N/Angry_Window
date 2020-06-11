@@ -14,7 +14,7 @@ Functions
 - Following the mouse cursor/pointer.
 - Shaking violently in a spot.
 - Moving around the screen in random directions periodically.
-
+- Changing colours.
 
 Usage
 -
