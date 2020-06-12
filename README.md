@@ -20,3 +20,6 @@ Usage
 -
 
 ![alt text](/sample.PNG "Example")
+<p align="center"> 
+<img src="/sample.PNG">
+</p>
