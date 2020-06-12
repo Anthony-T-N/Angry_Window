@@ -19,4 +19,4 @@ Functions
 Usage
 -
 
-![alt text](sample.PNG "Example")
+![alt text](/sample.PNG "Example")
