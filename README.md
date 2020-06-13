@@ -19,8 +19,8 @@ Functions
 
 Deliberate Design "Features"
 -
-- Close button removed
-- Fixed window dimensions
+- Close button/icon removed.
+- Fixed window dimensions.
 
 Usage
 -
