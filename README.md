@@ -15,7 +15,6 @@ Functions
 - Shaking violently in a spot.
 - Moving around the screen in random directions periodically.
 - Changing colours.
-- Changing colours.
 
 Deliberate Design "Features"
 -
