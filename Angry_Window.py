@@ -267,26 +267,36 @@ class Angry_Window():
 
     def window_bounce(self, event):
         
-        if (self.root.winfo_x() >= 1820):
-            print("Right-Edge")
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() - 1))
-            self.root.update()
+        while True:
+            print("x:", self.root.winfo_rootx(), "y:", self.root.winfo_rooty())
+            if (self.root.winfo_x() >= 1820):
+                print("Right-Edge")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() - 1))
+                self.root.update()
+                top_edge_switch = True
+                right_edge_switch = False
 
-        if (self.root.winfo_y() >= 1):
-            print("Top-Edge")
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
-            self.root.update()
+            if (self.root.winfo_y() <= 1):
+                print("Top-Edge")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
+                self.root.update()
+                top_edge_switch = False
+                right_edge_switch = True
 
-        if (self.root.winfo_x() <= 0):
-            print("Left-Edge")
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
-            self.root.update()
-        
-        
-        if (self.root.winfo_y() >= 980):
-            print("Bottom-Edge")
-            self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
-            self.root.update()
+            if (self.root.winfo_x() <= 0):
+                print("Left-Edge")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
+                self.root.update()
+                left_edge_switch = True
+                top_edge_switch = False
+                
+            if (self.root.winfo_y() >= 980):
+                print("Bottom-Edge")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() - 1))
+                self.root.update()
+                right_edge_switch = True
+                bottom_edge_switch = False
+                
 
     def self_control(self, event):
         while True:
@@ -318,6 +328,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
