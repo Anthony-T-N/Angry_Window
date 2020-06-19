@@ -267,30 +267,36 @@ class Angry_Window():
 
     def window_bounce(self, event):
         
+        top_edge_switch = False
+        right_edge_switch = False
+        left_edge_switch = False
+        bottom_edge_switch = False
+
         while True:
             print("x:", self.root.winfo_rootx(), "y:", self.root.winfo_rooty())
-            if (self.root.winfo_x() >= 1820):
+            if (self.root.winfo_x() >= 1820 or top_edge_switch == True):
                 print("Right-Edge")
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() - 1))
                 self.root.update()
                 top_edge_switch = True
                 right_edge_switch = False
 
-            if (self.root.winfo_y() <= 1):
+            if (self.root.winfo_y() <= 1 or left_edge_switch == True):
+                print(right_edge_switch)
                 print("Top-Edge")
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
-                self.root.update()
-                top_edge_switch = False
-                right_edge_switch = True
-
-            if (self.root.winfo_x() <= 0):
-                print("Left-Edge")
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
                 self.root.update()
                 left_edge_switch = True
                 top_edge_switch = False
                 
-            if (self.root.winfo_y() >= 980):
+            if (self.root.winfo_x() <= 0 or bottom_edge_switch == True):
+                print("Left-Edge")
+                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
+                self.root.update()
+                bottom_edge_switch = True
+                left_edge_switch = True
+                
+            if (self.root.winfo_y() >= 980 or right_edge_switch == True):
                 print("Bottom-Edge")
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() - 1))
                 self.root.update()
@@ -328,6 +334,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
