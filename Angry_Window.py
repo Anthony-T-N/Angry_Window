@@ -265,8 +265,9 @@ class Angry_Window():
                 self.root.update()
             self.root.update()
 
+    
     def window_bounce(self, event):
-        
+        # Very messy function.
         top_edge_switch = False
         right_edge_switch = False
         left_edge_switch = False
@@ -281,6 +282,9 @@ class Angry_Window():
                 top_edge_switch = True
                 right_edge_switch = False
 
+                left_edge_switch = False
+                bottom_edge_switch = False
+
             if (self.root.winfo_y() <= 1 or left_edge_switch == True):
                 print(right_edge_switch)
                 print("Top-Edge")
@@ -288,13 +292,19 @@ class Angry_Window():
                 self.root.update()
                 left_edge_switch = True
                 top_edge_switch = False
+
+                right_edge_switch = False
+                bottom_edge_switch = False
                 
             if (self.root.winfo_x() <= 0 or bottom_edge_switch == True):
                 print("Left-Edge")
                 self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
                 self.root.update()
                 bottom_edge_switch = True
-                left_edge_switch = True
+                left_edge_switch = False
+
+                top_edge_switch = False
+                right_edge_switch = False
                 
             if (self.root.winfo_y() >= 980 or right_edge_switch == True):
                 print("Bottom-Edge")
@@ -302,6 +312,9 @@ class Angry_Window():
                 self.root.update()
                 right_edge_switch = True
                 bottom_edge_switch = False
+
+                bottom_edge_switch = False
+                left_edge_switch = False
                 
 
     def self_control(self, event):
