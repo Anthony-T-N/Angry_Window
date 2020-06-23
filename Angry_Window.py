@@ -109,6 +109,16 @@ class Angry_Window():
         self.face_holder.set(str(self.random_faces[random.randrange(6)]))
         self.root.update()
 
+    def window_colour_change(self):
+        for _ in range(10):
+            internal_option = random.randrange(4)
+            colour_list = ["0e4f73", "DBDE31", "266D15", "D21F37"]
+            print("#" + colour_list[internal_option])
+            self.root.configure(bg="#" + colour_list[internal_option])
+            self.root.update()
+        self.root.after(50000, self.window_colour_change)
+            #time.sleep(0.1)
+
     def pos_spasm(self):
         random_option = random.randrange(4)
         current_x, current_y = self.root.winfo_x(), self.root.winfo_y()
@@ -176,16 +186,6 @@ class Angry_Window():
 
     def mouse_release(self, event):
         self.free_fall()
-
-    def window_colour_change(self):
-        for _ in range(10):
-            internal_option = random.randrange(4)
-            colour_list = ["0e4f73", "DBDE31", "266D15", "D21F37"]
-            print("#" + colour_list[internal_option])
-            self.root.configure(bg="#" + colour_list[internal_option])
-            self.root.update()
-        self.root.after(50000, self.window_colour_change)
-            #time.sleep(0.1)
 
     def follow_mouse(self, event):
         while True:
@@ -264,7 +264,6 @@ class Angry_Window():
                 self.root.update()
             self.root.update()
 
-    
     def window_bounce(self, event):
         # Very messy function.
         top_edge_switch = False
@@ -315,7 +314,6 @@ class Angry_Window():
                 bottom_edge_switch = False
                 left_edge_switch = False
                 
-
     def self_control(self, event):
         while True:
             internal_option = random.randrange(5)
@@ -346,7 +344,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 
