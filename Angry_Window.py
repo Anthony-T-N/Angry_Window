@@ -265,6 +265,16 @@ class Angry_Window():
             self.root.update()
 
     def window_bounce(self, event):
+        
+        # TODO: When window hits side of screen, there is a 50% probability of moving in either two directions.
+        # TODO: Must consider all sides of the screen.
+
+        # If window touches Right-edge: Either move to the top or bottom edge.
+        # If window touches Top-edge: Either move to left or right edge.
+        # If window touches Left-edge: Either move to top or bottom edge.
+        # If window touches Bottom-edge: Either move to left or right edge.
+
+        """
         # Very messy function.
         top_edge_switch = False
         right_edge_switch = False
@@ -313,6 +323,7 @@ class Angry_Window():
 
                 bottom_edge_switch = False
                 left_edge_switch = False
+        """
                 
     def self_control(self, event):
         while True:
@@ -344,9 +355,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
 
 
 
