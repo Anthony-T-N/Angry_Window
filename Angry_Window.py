@@ -270,7 +270,7 @@ class Angry_Window():
         # TODO: Must consider all sides of the screen.
 
         # If window touches Right-edge: Either move to the top or bottom edge.
-        if (self.root.winfo_x() >= 1820 or top_edge_switch == True):
+        if (self.root.winfo_x() >= 1820):
                 print("Right-Edge")
                 random_option = random.randrange(1)
                 if (random_option == 0):
@@ -279,7 +279,7 @@ class Angry_Window():
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
                 self.root.update()
         # If window touches Top-edge: Either move to left or right edge.
-        if (self.root.winfo_y() <= 1 or left_edge_switch == True):
+        if (self.root.winfo_y() <= 1):
                 print("Top-Edge")
                 random_option = random.randrange(1)
                 if (random_option == 0):
@@ -288,7 +288,7 @@ class Angry_Window():
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
                 self.root.update()
         # If window touches Left-edge: Either move to top or bottom edge.
-        if (self.root.winfo_x() <= 0 or bottom_edge_switch == True):
+        if (self.root.winfo_x() <= 0):
                 print("Left-Edge")
                 random_option = random.randrange(1)
                 if (random_option == 0):
@@ -297,6 +297,14 @@ class Angry_Window():
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() - 1))
                 self.root.update()
         # If window touches Bottom-edge: Either move to left or right edge.
+        if (self.root.winfo_y() >= 980):
+                print("Bottom-Edge")
+                random_option = random.randrange(1)
+                if (random_option == 0):
+                    self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() - 1))
+                elif (random_option == 1):
+                    self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() - 1))
+                self.root.update()
 
         """
         # Very messy function.
@@ -379,6 +387,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
