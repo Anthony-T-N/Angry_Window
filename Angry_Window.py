@@ -269,26 +269,47 @@ class Angry_Window():
         # TODO: When window hits side of screen, there is a 50% probability of moving in either two directions.
         # TODO: Must consider all sides of the screen.
 
-        # If window touches Right-edge: Either move to the top or bottom edge.
-        if (self.root.winfo_x() >= 1820):
+        while True:
+
+            right_edge_switch_1 = False
+            right_edge_switch_2 = False
+
+            top_edge_switch_1 = False
+            top_edge_switch_2 = False
+
+            top_edge_switch = False
+            left_edge_switch = False
+            bottom_edge_switch = False
+
+            switch_1 = False
+            switch_2 = False
+
+            # If window touches Right-edge: Either move to the top or bottom edge.
+            if (self.root.winfo_x() >= 1820):
                 print("Right-Edge")
-                random_option = random.randrange(1)
-                if (random_option == 0):
+                if (right_edge_switch_1 == False and right_edge_switch_2 == False):
+                    random_option = random.randrange(1)
+                if (random_option == 0 or right_edge_switch_1 == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() - 1))
-                elif (random_option == 1):
+                    right_edge_switch_1 = True
+                elif (random_option == 1 or right_edge_switch_2 == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
+                    right_edge_switch_2 = True
                 self.root.update()
-        # If window touches Top-edge: Either move to left or right edge.
-        if (self.root.winfo_y() <= 1):
+            # If window touches Top-edge: Either move to left or right edge.
+            if (self.root.winfo_y() <= 1):
                 print("Top-Edge")
-                random_option = random.randrange(1)
-                if (random_option == 0):
+                if (top_edge_switch_1 == False and top_edge_switch_2 == False):
+                    random_option = random.randrange(1)
+                if (random_option == 0 or top_edge_switch_1 == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
-                elif (random_option == 1):
+                    top_edge_switch_1 = True
+                elif (random_option == 1 or top_edge_switch_2 == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
+                    top_edge_switch_2 = True
                 self.root.update()
-        # If window touches Left-edge: Either move to top or bottom edge.
-        if (self.root.winfo_x() <= 0):
+            # If window touches Left-edge: Either move to top or bottom edge.
+            if (self.root.winfo_x() <= 0):
                 print("Left-Edge")
                 random_option = random.randrange(1)
                 if (random_option == 0):
@@ -296,8 +317,8 @@ class Angry_Window():
                 elif (random_option == 1):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() - 1))
                 self.root.update()
-        # If window touches Bottom-edge: Either move to left or right edge.
-        if (self.root.winfo_y() >= 980):
+            # If window touches Bottom-edge: Either move to left or right edge.
+            if (self.root.winfo_y() >= 980):
                 print("Bottom-Edge")
                 random_option = random.randrange(1)
                 if (random_option == 0):
