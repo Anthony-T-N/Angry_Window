@@ -271,6 +271,21 @@ class Angry_Window():
         # TODO: When window hits side of screen, there is a 50% probability of moving in either two directions.
         # TODO: Must consider all sides of the screen.
 
+        switch_dict = {
+
+            right_edge_switch_1: False,
+            right_edge_switch_2: False,
+
+            top_edge_switch_1: False,
+            top_edge_switch_2: False,
+
+            left_edge_switch_1: False,
+            left_edge_switch_2: False,
+
+            bottom_edge_switch_1: False,
+            bottom_edge_switch_2: False
+        }
+        """
         right_edge_switch_1 = False
         right_edge_switch_2 = False
 
@@ -282,6 +297,7 @@ class Angry_Window():
 
         bottom_edge_switch_1 = False
         bottom_edge_switch_2 = False
+        """
 
         while True:
 
