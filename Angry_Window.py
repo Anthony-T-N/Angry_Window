@@ -270,89 +270,90 @@ class Angry_Window():
 
         # TODO: When window hits side of screen, there is a 50% probability of moving in either two directions.
         # TODO: Must consider all sides of the screen.
-
+        # TODO: Prioritise switch_dict over random_option.
+        
         switch_dict = {
 
-            right_edge_switch_1: False,
-            right_edge_switch_2: False,
+            'right_edge_switch_1': False,
+            'right_edge_switch_2': False,
 
-            top_edge_switch_1: False,
-            top_edge_switch_2: False,
+            'top_edge_switch_1': False,
+            'top_edge_switch_2': False,
 
-            left_edge_switch_1: False,
-            left_edge_switch_2: False,
+            'left_edge_switch_1': False,
+            'left_edge_switch_2': False,
 
-            bottom_edge_switch_1: False,
-            bottom_edge_switch_2: False
+            'bottom_edge_switch_1': False,
+            'bottom_edge_switch_2': False
         }
-        """
-        right_edge_switch_1 = False
-        right_edge_switch_2 = False
-
-        top_edge_switch_1 = False
-        top_edge_switch_2 = False
-
-        left_edge_switch_1 = False
-        left_edge_switch_2 = False
-
-        bottom_edge_switch_1 = False
-        bottom_edge_switch_2 = False
-        """
 
         while True:
-
-            print("Loop")
-
             # If window touches Right-edge: Either move to the top or bottom edge.
-            if (self.root.winfo_x() >= 1820):
+            if (self.root.winfo_x() >= 1820 or switch_dict['right_edge_switch_1'] == True or switch_dict['right_edge_switch_2'] == True):
                 print("Right-Edge")
-                if (right_edge_switch_1 == False and right_edge_switch_2 == False):
+                if (switch_dict['right_edge_switch_1'] == False and switch_dict['right_edge_switch_2'] == False):
                     random_option = random.randrange(1)
-                if (random_option == 0 or right_edge_switch_1 == True):
+                if (random_option == 0 or switch_dict['right_edge_switch_1'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() - 1))
-                    right_edge_switch_1 = True
-                elif (random_option == 1 or right_edge_switch_2 == True):
+                    for key, value in switch_dict.items():
+                        switch_dict[key] = False
+                    switch_dict['right_edge_switch_1'] = True
+                elif (random_option == 1 or switch_dict['right_edge_switch_2'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
-                    right_edge_switch_2 = True
+                    for key, value in switch_dict.items():
+                        switch_dict[key] = False
+                    switch_dict['right_edge_switch_2'] = True
                 self.root.update()
             
             # If window touches Top-edge: Either move to left or right edge.
-            if (self.root.winfo_y() <= 1):
+            if (self.root.winfo_y() <= 1 or switch_dict['top_edge_switch_1'] == True or switch_dict['top_edge_switch_2'] == True):
                 print("Top-Edge")
-                if (top_edge_switch_1 == False and top_edge_switch_2 == False):
+                if (switch_dict['top_edge_switch_1'] == False and switch_dict['top_edge_switch_2'] == False):
                     random_option = random.randrange(1)
-                if (random_option == 0 or top_edge_switch_1 == True):
+                if (random_option == 0 or switch_dict['top_edge_switch_1'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
-                    top_edge_switch_1 = True
-                elif (random_option == 1 or top_edge_switch_2 == True):
+                    for key, value in switch_dict.items():
+                        switch_dict[key] = False
+                    switch_dict['top_edge_switch_1'] = True
+                elif (random_option == 1 or switch_dict['top_edge_switch_2'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
-                    top_edge_switch_2 = True
+                    for key, value in switch_dict.items():
+                        switch_dict[key] = False
+                    switch_dict['top_edge_switch_2'] = True
                 self.root.update()
             
             # If window touches Left-edge: Either move to top or bottom edge.
-            if (self.root.winfo_x() <= 0):
+            if (self.root.winfo_x() <= 0 or switch_dict['left_edge_switch_1'] == True or switch_dict['left_edge_switch_2'] == True):
                 print("Left-Edge")
-                if (left_edge_switch_1 == False and left_edge_switch_2 == False):
+                if (switch_dict['left_edge_switch_1'] == False and switch_dict['left_edge_switch_2'] == False):
                     random_option = random.randrange(1)
-                if (random_option == 0 or left_edge_switch_1 == True):
+                if (random_option == 0 or switch_dict['left_edge_switch_1'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
-                    left_edge_switch_1 = True
-                elif (random_option == 1 or left_edge_switch_2 == True):
+                    for key, value in switch_dict.items():
+                        switch_dict[key] = False
+                    switch_dict['left_edge_switch_1'] = True
+                elif (random_option == 1 or switch_dict['left_edge_switch_2'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() - 1))
-                    left_edge_switch_2 = True
+                    for key, value in switch_dict.items():
+                        switch_dict[key] = False
+                    switch_dict['left_edge_switch_2'] = True
                 self.root.update()
             
             # If window touches Bottom-edge: Either move to left or right edge.
-            if (self.root.winfo_y() >= 980):
+            if (self.root.winfo_y() >= 980 or switch_dict['bottom_edge_switch_1'] == True or switch_dict['bottom_edge_switch_2'] == True):
                 print("Bottom-Edge")
-                if (bottom_edge_switch_1 == False and bottom_edge_switch_2 == False):
+                if (switch_dict['bottom_edge_switch_1'] == False and switch_dict['bottom_edge_switch_2'] == False):
                     random_option = random.randrange(1)
-                if (random_option == 0 or bottom_edge_switch_1 == True):
+                if (random_option == 0 or switch_dict['bottom_edge_switch_1'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() - 1))
-                    bottom_edge_switch_1 = True
-                elif (random_option == 1 or bottom_edge_switch_2 == True):
+                    for key, value in switch_dict.items():
+                        switch_dict[key] = False
+                    switch_dict['bottom_edge_switch_1'] = True
+                elif (random_option == 1 or switch_dict['bottom_edge_switch_2'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() - 1))
-                    bottom_edge_switch_2 = True
+                    for key, value in switch_dict.items():
+                        switch_dict[key] = False
+                    switch_dict['bottom_edge_switch_2'] = True
                 self.root.update()
 
         """
@@ -422,6 +423,7 @@ class Angry_Window():
                 self.place_middle_of_screen()
 
     def close(self, event):
+        print("Destroying Window")
         self.root.destroy()
 
 def main():
@@ -436,6 +438,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
