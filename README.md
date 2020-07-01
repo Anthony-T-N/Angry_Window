@@ -16,6 +16,7 @@ Functions
 - Moving around the screen in random directions periodically.
 - Changing colours.
 - Changing text emoticons.
+- Bounces to different sides of the screen.
 
 Deliberate Design "Features"
 -
