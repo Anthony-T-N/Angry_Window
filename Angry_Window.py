@@ -265,13 +265,8 @@ class Angry_Window():
             self.root.update()
 
     def window_bounce(self, event):
-        
         print("Window_Bounce")
-
-        # TODO: When window hits side of screen, there is a 50% probability of moving in either two directions.
-        # TODO: Must consider all sides of the screen.
-        # TODO: Prioritise switch_dict over random_option.
-        
+    
         switch_dict = {
 
             'right_edge_switch_1': False,
@@ -292,7 +287,7 @@ class Angry_Window():
             if (self.root.winfo_x() >= 1820 or switch_dict['right_edge_switch_1'] == True or switch_dict['right_edge_switch_2'] == True):
                 print("Right-Edge")
                 if (switch_dict['right_edge_switch_1'] == False and switch_dict['right_edge_switch_2'] == False):
-                    random_option = random.randrange(1)
+                    random_option = random.randrange(2)
                 if (random_option == 0 or switch_dict['right_edge_switch_1'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() - 1))
                     for key, value in switch_dict.items():
@@ -309,7 +304,7 @@ class Angry_Window():
             if (self.root.winfo_y() <= 1 or switch_dict['top_edge_switch_1'] == True or switch_dict['top_edge_switch_2'] == True):
                 print("Top-Edge")
                 if (switch_dict['top_edge_switch_1'] == False and switch_dict['top_edge_switch_2'] == False):
-                    random_option = random.randrange(1)
+                    random_option = random.randrange(2)
                 if (random_option == 0 or switch_dict['top_edge_switch_1'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
                     for key, value in switch_dict.items():
@@ -326,7 +321,7 @@ class Angry_Window():
             if (self.root.winfo_x() <= 0 or switch_dict['left_edge_switch_1'] == True or switch_dict['left_edge_switch_2'] == True):
                 print("Left-Edge")
                 if (switch_dict['left_edge_switch_1'] == False and switch_dict['left_edge_switch_2'] == False):
-                    random_option = random.randrange(1)
+                    random_option = random.randrange(2)
                 if (random_option == 0 or switch_dict['left_edge_switch_1'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
                     for key, value in switch_dict.items():
@@ -343,7 +338,7 @@ class Angry_Window():
             if (self.root.winfo_y() >= 980 or switch_dict['bottom_edge_switch_1'] == True or switch_dict['bottom_edge_switch_2'] == True):
                 print("Bottom-Edge")
                 if (switch_dict['bottom_edge_switch_1'] == False and switch_dict['bottom_edge_switch_2'] == False):
-                    random_option = random.randrange(1)
+                    random_option = random.randrange(2)
                 if (random_option == 0 or switch_dict['bottom_edge_switch_1'] == True):
                     self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() - 1))
                     for key, value in switch_dict.items():
@@ -355,57 +350,6 @@ class Angry_Window():
                         switch_dict[key] = False
                     switch_dict['bottom_edge_switch_2'] = True
                 self.root.update()
-
-        """
-        # Very messy function.
-        top_edge_switch = False
-        right_edge_switch = False
-        left_edge_switch = False
-        bottom_edge_switch = False
-
-        while True:
-            print("x:", self.root.winfo_rootx(), "y:", self.root.winfo_rooty())
-            if (self.root.winfo_x() >= 1820 or top_edge_switch == True):
-                print("Right-Edge")
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() - 1))
-                self.root.update()
-                top_edge_switch = True
-                right_edge_switch = False
-
-                left_edge_switch = False
-                bottom_edge_switch = False
-
-            if (self.root.winfo_y() <= 1 or left_edge_switch == True):
-                print(right_edge_switch)
-                print("Top-Edge")
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() - 1) + "+" + str(self.root.winfo_y() + 1))
-                self.root.update()
-                left_edge_switch = True
-                top_edge_switch = False
-
-                right_edge_switch = False
-                bottom_edge_switch = False
-                
-            if (self.root.winfo_x() <= 0 or bottom_edge_switch == True):
-                print("Left-Edge")
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() + 1))
-                self.root.update()
-                bottom_edge_switch = True
-                left_edge_switch = False
-
-                top_edge_switch = False
-                right_edge_switch = False
-                
-            if (self.root.winfo_y() >= 980 or right_edge_switch == True):
-                print("Bottom-Edge")
-                self.root.geometry("100x100" + "+" + str(self.root.winfo_x() + 1) + "+" + str(self.root.winfo_y() - 1))
-                self.root.update()
-                right_edge_switch = True
-                bottom_edge_switch = False
-
-                bottom_edge_switch = False
-                left_edge_switch = False
-        """
                 
     def self_control(self, event):
         while True:
@@ -438,6 +382,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
