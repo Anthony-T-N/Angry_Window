@@ -23,6 +23,7 @@ Deliberate Design "Features"
 - Close button/icon removed.
 - Fixed window dimensions.
 - Not maximizable or minimizable.
+- Always in front of all other windows on the display or window stack.
 
 Usage
 -
